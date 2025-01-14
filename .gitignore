@@ -1,22 +1,23 @@
-
-# Ignore storage except for storage/logs
-/storage/*
-!/storage/logs
-
-# Ignore vendor directory
-/vendor/
-
-# Ignore Node.js modules
-/node_modules/
-
-# IDE files
-/.idea/
-/.vscode/
-
-# Ignore environment files
+/.phpunit.cache
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
 .env
-.env.*
-
-# Ignore OS files
-.DS_Store
-Thumbs.db
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
