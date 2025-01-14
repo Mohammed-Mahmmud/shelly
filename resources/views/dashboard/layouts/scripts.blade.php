@@ -17,7 +17,7 @@
      <script src="{{ asset('dashboard') }}/assets/js/dashboard.js"></script>
      {{-- toastr js links --}}
      <script src="{{ asset('dashboard/assets/js/extensions/toastr.min.js') }}"></script>
-
+     <script src="{{ asset('dashboard/layouts/components/sidebar/js/script.js') }}"></script>
      {{-- yajra data table --}}
      <script src="{{ asset('dashboard/assets/datatables/dataTables.min.js') }}"></script>
      <script src="{{ asset('dashboard/assets/datatables/tables.js') }}"></script>

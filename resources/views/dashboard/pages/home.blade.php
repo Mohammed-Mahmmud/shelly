@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.master')
-@section('title', 'Bevatel')
+@section('title', 'Home')
 @section('css')
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('dashboard') }}/assets/s/images/favicon.ico">

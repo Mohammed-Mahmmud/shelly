@@ -2,7 +2,7 @@
 <div class="app-menu navbar-menu">
     <!-- LOGO -->
     <div class="navbar-brand-box">
-        <a href="index.html" class="logo logo-dark">
+        <a href="{{ route('admin.mainDashboard.index') }}" class="logo logo-dark">
             <span class="logo-sm">
                 <img src="{{ asset('dashboard/assets/images/logo-sm.png') }}" alt="" height="22">
             </span>
@@ -10,7 +10,7 @@
                 <img src="{{ asset('dashboard/assets/images/logo-dark.png') }}" alt="" height="22">
             </span>
         </a>
-        <a href="index.html" class="logo logo-light">
+        <a href="{{ route('admin.mainDashboard.index') }}" class="logo logo-light">
             <span class="logo-sm">
                 <img src="{{ asset('dashboard/assets/images/logo-sm.png') }}" alt="" height="22">
             </span>
@@ -34,7 +34,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('users.index') }}" class="nav-link menu-link"> <i class="bx bx-user-circle"></i>
+                    <a href="{{ route('admin.users.index') }}" class="nav-link menu-link @yield('users-active')"> <i
+                            class="bx bx-user-circle"></i>
                         <span data-key="t-calendar">Admins</span> </a>
                 </li>
 

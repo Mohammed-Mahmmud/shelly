@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 @section('title', 'Users')
-@section('users-active', 'active')
+@section('users-active', 'activeSidebar')
 @section('css')
 @endsection
 @section('content')
@@ -14,7 +14,7 @@
                             <div class="card-header">
                                 <div class="row g-1 mb-0">
                                     <div class="col-sm-auto">
-                                        <a class="btn btn-success add-btn" href="{{ route('users.create') }}"
+                                        <a class="btn btn-success add-btn" href="{{ route('admin.users.create') }}"
                                             data-bs-toggle="modal" data-bs-target="#createNewUser">add user</a>
                                     </div>
                                 </div>
@@ -53,7 +53,7 @@
                                                                 </div>
 
                                                                 <x-form.modal :id="'edit' . $item->id" :title="'update user'"
-                                                                    :action="route('users.update', $item->id)" :method="'PUT'">
+                                                                    :action="route('admin.users.update', $item->id)" :method="'PUT'">
                                                                     <div class="col-4">
                                                                         <label for="name" class="form-label">user
                                                                             name</label>
@@ -91,7 +91,7 @@
                                                                     </a>
                                                                 </div>
                                                                 <x-form.modal :id="'delete' . $item->id" :title="'Remove User'"
-                                                                    :action="route('users.destroy', $item->id)" :method="'DELETE'">
+                                                                    :action="route('admin.users.destroy', $item->id)" :method="'DELETE'">
                                                                     <div class="col-12">
                                                                         {{ 'Are You Sure You Want To Remove' . '  ' . $item->name }}
                                                                     </div>
@@ -112,7 +112,7 @@
                 </div>
                 <!-- end row -->
 
-                <x-form.modal :id="'createNewUser'" :title="'Add User'" :action="route('users.store')" :method="'POST'">
+                <x-form.modal :id="'createNewUser'" :title="'Add User'" :action="route('admin.users.store')" :method="'POST'">
                     <div class="col-4">
                         <label for="name" class="form-label">user name</label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="user name"

@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         try {
             app(StoreUserAction::class)->handle($request->validationStore()->validated());
-            return redirect()->route('users.index');
+            return redirect()->route('admin.users.index');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -67,7 +67,7 @@ class UserController extends Controller
         try {
             $user = User::FindOrFail($id);
             app(UpdateUserAction::class)->handle($user, $request->validationUpdate()->validated());
-            return redirect()->route('users.index');
+            return redirect()->route('admin.users.index');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

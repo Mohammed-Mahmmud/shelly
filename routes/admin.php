@@ -23,7 +23,7 @@ Route::group(
 
         require __DIR__ . '/auth.php';
         Route::redirect("register", "login"); //Dashboard Routes
-        Route::middleware('auth')->group(function () {
+        Route::name('admin.')->middleware('auth')->group(function () {
 
             Route::resource('/', DashboardController::class)->names('mainDashboard');
             //   users

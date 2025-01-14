@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title>@yield('title')</title>
+<title>Shelly | @yield('title')</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta content="" name="description">
 {{-- <link href="{{ asset('dashboard/assets/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css"> --}}
@@ -14,6 +14,8 @@
 <link rel="stylesheet" href="{{ asset('dashboard/assets/css/extensions/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('dashboard/assets/css/extensions/dropzone.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/assets/css/extensions/font.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('dashboard/layouts/components/sidebar/css/style.css') }}">
+
 {{-- yajra data table --}}
 <link rel="stylesheet" href="{{ asset('dashboard/assets/datatables/dataTables.min.css') }}">
 
@@ -37,6 +39,4 @@
     <link href="{{ asset('dashboard/assets/css/custom.min.css') }}" rel="stylesheet">
     <!-- Bootstrap Css -->
 @endif
-{{-- sync Database --}}
-<link rel="stylesheet" href="{{ asset('dashboard/assets/css/syncDatabases.css') }}">
 @yield('css')
