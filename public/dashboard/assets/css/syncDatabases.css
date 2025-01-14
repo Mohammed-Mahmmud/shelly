@@ -1,0 +1,27 @@
+.status-sync-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Space between the status and the button */
+}
+
+.status {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.online {
+    color: rgb(4, 252, 4);
+}
+
+.offline {
+    color: red;
+}
+
+.showBTN {
+    display: show;
+}
+
+.hideBTN {
+    display: none;
+}

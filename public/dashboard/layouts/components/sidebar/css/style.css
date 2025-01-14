@@ -1,0 +1,10 @@
+.activeSidebar {
+    color: #e72929 !important;
+    background-color: white !important;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.active {
+    color: black !important;
+}
