@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+    shally:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: shally
+        restart: always
+        volumes:
+            - .:/var/www/html
+            - /var/www/html/vendor
+        ports:
+            - "9000:80"
+        depends_on:
+            - mysql
+        networks:
+            - shally-network
+
+    mysql:
+        image: mysql:8.0
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: mysecretpassword
+            MYSQL_DATABASE: shally
+        ports:
+        - "3306:3306"
+        volumes:
+        - ../mysql-data:/var/lib/mysql
+        - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+        networks:
+        - shally-network
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        environment:
+            PMA_HOST: mysql
+            PMA_PORT: 3306
+        ports:
+        - "8090:80"
+        depends_on:
+        - mysql
+        networks:
+        - shally-network
+
+volumes:
+    mysql-data:
+        driver: local
+
+networks:
+  shally-network:
+    external: true
