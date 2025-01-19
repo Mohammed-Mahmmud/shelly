@@ -1,0 +1,28 @@
+product one 
+
+title
+desc
+stock
+price
+long_desc
+images
+snippet_image
+
+relation with table  Key Features   (O-M)      -> [ [ tilte , desc, prod_id ] , [ tilte , prod_id ] ]     
+relation with table  articles       (O-M)      -> [ [ tilte , desc, prod_id ] , [ tilte , desc, prod_id ] ]
+
+relation with table  categories     (M-N) -> [ [tile , icon, desc , cover], [tile , icon , desc , cover] ]   -> crud  (drop list)
+
+relation with table  product using  (M-N) -> [ [tile , icon], [tile , icon] ]  -> crud  (drop list)
+relation with table  type           (M-N) -> [ [tile , icon], [tile , icon] ]  -> crud  (drop list)
+relation with table  technology     (M-N) -> [ [tile , icon], [tile , icon] ]  -> crud  (drop list)
+
+filters (not yet)
+
+table categories    table product
+prod -> M -> category
+Tag ->  M -> prod
+
+crud type
+crud technology
+crud product using

@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -28,6 +30,7 @@ Route::group(
             Route::resource('/', DashboardController::class)->names('mainDashboard');
             //   users
             Route::resource('Users', UserController::class)->names('users');
+            Route::resource('Products', ProductController::class)->names('products');
         });
     }
 );

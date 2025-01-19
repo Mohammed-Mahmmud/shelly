@@ -38,7 +38,11 @@
                             class="bx bx-user-circle"></i>
                         <span data-key="t-calendar">Admins</span> </a>
                 </li>
-
+                <li class="nav-item">
+                    <a href="{{ route('admin.products.index') }}" class="nav-link menu-link @yield('products-active')"> <i
+                            class=" bx bx-book-content"></i>
+                        <span data-key="t-calendar">Products</span> </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->

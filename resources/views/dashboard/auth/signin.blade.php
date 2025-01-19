@@ -19,7 +19,7 @@
                                 <div class="card mb-0 border-0 shadow-none mb-0">
                                     <div class="card-body p-sm-100 m-lg-1">
                                         <div class="text-center mt-1">
-                                            <h5 class="fs-3xl">{{ trans('Dashboard/login_trans.Welcome Back') }}</h5>
+                                            <h5 class="fs-3xl">Welcome Back</h5>
                                         </div>
                                         <div class="p-1 mt-1">
 
@@ -30,8 +30,7 @@
                                                     @else
                                                         <div class="mb-3">
                                                 @endif
-                                                <label for="email"
-                                                    class="form-label">{{ trans('Dashboard/login_trans.Email') }} <span
+                                                <label for="email" class="form-label">Email <span
                                                         class="text-danger">*</span></label>
                                                 <div class="position-relative ">
                                                     <input type="email" name="email"
@@ -48,8 +47,7 @@
                                             @else
                                                 <div class="mb-3">
                                         @endif
-                                        <label class="form-label"
-                                            for="password-input">{{ trans('Dashboard/login_trans.Password') }} <span
+                                        <label class="form-label" for="password-input">Password<span
                                                 class="text-danger">*</span></label>
                                         <div class="position-relative auth-pass-inputgroup mb-3 ">
                                             <input type="password" id="password" name="password"
@@ -66,15 +64,13 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="1" id="remember_me"
                                             name="remember">
-                                        <label class="form-check-label"
-                                            for="remember_me">{{ trans('Dashboard/login_trans.Remember me') }}
+                                        <label class="form-check-label" for="remember_me">Remember me
                                         </label>
                                     </div>
                                     <br>
 
 
-                                    <button class="btn btn-primary w-100"
-                                        type="submit">{{ trans('Dashboard/login_trans.login') }}</button>
+                                    <button class="btn btn-primary w-100" type="submit">login</button>
                                 </div>
 
 
@@ -84,7 +80,6 @@
                                     @else
                                         <div class="text-center mt-5">
                                 @endif
-                                {{-- <p class="mb-0">{{ trans("Dashboard/login_trans.Don't have an account ?") }} <a href="{{ route('register') }}" class="fw-semibold text-primary text-decoration-underline">{{ trans("Dashboard/login_trans.SignUp") }} </a> </p> --}}
                             </div>
                         </div>
                     </div><!-- end card body -->

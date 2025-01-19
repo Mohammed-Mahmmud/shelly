@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Actions\Products;
+
+use App\Helper\ImageHelper;
+use App\Models\Product;
+
+class UpdateProductAction
+{
+    use ImageHelper;
+    public function handle(Product $product, array $data)
+    {
+        $formattedData = [
+            "title" => [
+                "en" => $data['title_en'],
+                "ar" => $data['title_ar']
+            ],
+            "desc" => [
+                "en" => $data['desc_en'],
+                "ar" => $data['desc_ar']
+            ],
+            "stock" => [
+                "en" => $data['stock_en'],
+                "ar" => $data['stock_ar']
+            ],
+            "long_desc" => [
+                "en" => $data['long_desc_en'],
+                "ar" => $data['long_desc_ar']
+            ],
+            "price" => $data['price']
+        ];
+
+        $product->update($formattedData);
+
+        if (isset($data['images'])) {
+            foreach ($data['images'] as $image) {
+                $this->UpdateImage($image, $product, 'images');
+            }
+        }
+
+        if (isset($data['snippet_image'])) {
+            $this->UpdateImage($data['snippet_image'], $product, 'snippet_image');
+        }
+        toastr('data has been updated', 'info', 'success');
+        return $product;
+    }
+}
