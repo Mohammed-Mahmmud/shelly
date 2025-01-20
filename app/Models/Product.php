@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Features;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -21,4 +22,12 @@ class Product extends Model implements HasMedia
         'stock',
         'price'
     ];
+    public function features()
+    {
+        return $this->hasMany(Features::class, 'prod_id');
+    }
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'prod_id');
+    }
 }

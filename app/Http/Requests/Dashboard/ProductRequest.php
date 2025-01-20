@@ -41,6 +41,8 @@ class ProductRequest extends FormRequest
             'price' => 'nullable|numeric',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'snippet_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'features' =>  'nullable|string',
+            'articles' =>  'nullable|string',
         ]);
     }
     public function validationUpdate()
@@ -58,6 +60,9 @@ class ProductRequest extends FormRequest
             'price' => 'nullable|numeric',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'snippet_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'features' =>  'nullable|string',
+            'articles' =>  'nullable|string',
+
         ]);
     }
 }

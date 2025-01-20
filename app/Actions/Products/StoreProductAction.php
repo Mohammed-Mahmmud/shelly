@@ -2,6 +2,7 @@
 
 namespace App\Actions\Products;
 
+use App\Events\Dashboard\ProductCreated;
 use App\Helper\ImageHelper;
 use App\Models\Product;
 
@@ -39,6 +40,8 @@ class StoreProductAction
         if (isset($data['snippet_image'])) {
             $this->StoreImage($data['snippet_image'], $products, 'snippet_image');
         }
+
+        ProductCreated::dispatch($products, $data['features'], $data['articles'], $type = 'create');
 
         toastr('data has been saved', 'success', 'success');
         return $products;

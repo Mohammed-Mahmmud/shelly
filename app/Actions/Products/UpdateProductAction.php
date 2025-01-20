@@ -2,6 +2,7 @@
 
 namespace App\Actions\Products;
 
+use App\Events\Dashboard\ProductCreated;
 use App\Helper\ImageHelper;
 use App\Models\Product;
 
@@ -41,6 +42,7 @@ class UpdateProductAction
         if (isset($data['snippet_image'])) {
             $this->UpdateImage($data['snippet_image'], $product, 'snippet_image');
         }
+        ProductCreated::dispatch($product, $data['features'], $data['articles'], $type = 'edit');
         toastr('data has been updated', 'info', 'success');
         return $product;
     }

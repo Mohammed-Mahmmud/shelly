@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="{{ asset('dashboard/assets/css/extensions/css-toastr.css') }}">
 <link rel="stylesheet" href="{{ asset('dashboard/assets/css/extensions/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('dashboard/assets/css/extensions/dropzone.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('dashboard/assets/css/extensions/font.css') }}">
+{{-- <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/assets/css/extensions/font.css') }}"> --}}
 <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/layouts/components/sidebar/css/style.css') }}">
 
 {{-- yajra data table --}}
