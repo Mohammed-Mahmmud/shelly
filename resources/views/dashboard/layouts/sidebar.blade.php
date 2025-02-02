@@ -43,6 +43,26 @@
                             class=" bx bx-book-content"></i>
                         <span data-key="t-calendar">Products</span> </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.categories.index') }}" class="nav-link menu-link @yield('categories-active')"> <i
+                            class=" bx bx-book-content"></i>
+                        <span data-key="t-calendar">Categories</span> </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.types.index') }}" class="nav-link menu-link @yield('types-active')"> <i
+                            class=" bx bx-book-content"></i>
+                        <span data-key="t-calendar">Types</span> </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.technologies.index') }}" class="nav-link menu-link @yield('technologies-active')"> <i
+                            class=" bx bx-book-content"></i>
+                        <span data-key="t-calendar">Technologies</span> </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.product-using.index') }}" class="nav-link menu-link @yield('product-using-active')">
+                        <i class=" bx bx-book-content"></i>
+                        <span data-key="t-calendar">Product-Using</span> </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->

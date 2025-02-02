@@ -1,21 +1,21 @@
 @extends('dashboard.layouts.master')
-@section('title', 'Users')
-@section('users-active', 'activeSidebar')
+@section('title', 'Types')
+@section('types-active', 'activeSidebar')
 @section('css')
 @endsection
 @section('content')
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
-                <x-dashboard.layouts.breadcrumb title1="Users" title2="Users" title3="view users" />
+                <x-dashboard.layouts.breadcrumb title1="types" title2="types" title3="view types" />
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
                                 <div class="row g-1 mb-0">
                                     <div class="col-sm-auto">
-                                        <a class="btn btn-success add-btn" href="{{ route('admin.users.create') }}"
-                                            data-bs-toggle="modal" data-bs-target="#createNewUser">add user</a>
+                                        <a class="btn btn-success add-btn" href="{{ route('admin.types.create') }}"
+                                            data-bs-toggle="modal" data-bs-target="#createNewtype">add type</a>
                                     </div>
                                 </div>
                             </div><!-- end card header -->
@@ -28,19 +28,24 @@
                                                 <tr>
                                                     <th width="10%">#</th>
                                                     <th width="30%">
-                                                        name</th>
+                                                        Title EN</th>
                                                     <th width="30%">
-                                                        email</th>
+                                                        Title AR</th>
                                                     <th width="20%">
+                                                        icon</th>
+                                                    <th width="10%">
                                                         action</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="list form-check-all">
-                                                @foreach ($users as $key => $item)
+                                                @foreach ($data as $key => $item)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $item->name }}</td>
-                                                        <td>{{ $item->email }}</td>
+                                                        <td>{{ $item->getTranslation('title', 'en') }}</td>
+                                                        <td>{{ $item->getTranslation('title', 'ar') }}</td>
+                                                        <td>
+                                                            <i class="{{ $item->icon }}"></i>
+                                                        </td>
                                                         <td>
                                                             <div class="d-flex gap-2">
 
@@ -52,34 +57,36 @@
                                                                     </a>
                                                                 </div>
 
-                                                                <x-form.modal :id="'edit' . $item->id" :title="'update user'"
-                                                                    :action="route('admin.users.update', $item->id)" :method="'PUT'">
+                                                                <x-form.modal :id="'edit' . $item->id" :title="'update type'"
+                                                                    :action="route('admin.types.update', $item->id)" :method="'PUT'">
                                                                     <div class="col-4">
-                                                                        <label for="name" class="form-label">user
-                                                                            name</label>
-                                                                        <input type="text" id="name" name="name"
+                                                                        <label for="name" class="form-label">type
+                                                                            english name</label>
+                                                                        <input type="text" id="title_en" name="title_en"
                                                                             class="form-control"
-                                                                            placeholder="Enter user Name"
-                                                                            value="{{ $item->name }}" required="">
-                                                                        <x-form.error :name="'name'" />
+                                                                            placeholder="Enter english type Name"
+                                                                            value="{{ $item->getTranslation('title', 'en') }}"
+                                                                            required="">
+                                                                        <x-form.error :name="'title_en'" />
                                                                     </div>
                                                                     <div class="col-4">
-                                                                        <label for="email"
-                                                                            class="form-label">email</label>
-                                                                        <input type="email" id="email" name="email"
+                                                                        <label for="name" class="form-label">type
+                                                                            arabic name</label>
+                                                                        <input type="text" id="title_ar" name="title_ar"
                                                                             class="form-control"
-                                                                            placeholder=" Enter admin email"
-                                                                            value="{{ $item->email }}" required="">
-                                                                        <x-form.error :name="'email'" />
+                                                                            placeholder="Enter english type Name"
+                                                                            value="{{ $item->getTranslation('title', 'ar') }}"
+                                                                            required="">
+                                                                        <x-form.error :name="'title_ar'" />
                                                                     </div>
                                                                     <div class="col-4">
-                                                                        <label for="password"
-                                                                            class="form-label">password</label>
-                                                                        <input type="password" id="password"
-                                                                            name="password" class="form-control"
-                                                                            placeholder="Enter Updated Password"
-                                                                            required="" value="{{ $item->password }}">
-                                                                        <x-form.error :name="'password'" />
+                                                                        <label for="icon"
+                                                                            class="form-label">icon</label>
+                                                                        <input type="text" id="icon" name="icon"
+                                                                            class="form-control"
+                                                                            placeholder=" Enter admin icon"
+                                                                            value="{{ $item->icon }}" required="">
+                                                                        <x-form.error :name="'icon'" />
                                                                     </div>
                                                                 </x-form.modal>
 
@@ -90,8 +97,8 @@
                                                                         <i class="fas fa-trash"></i>
                                                                     </a>
                                                                 </div>
-                                                                <x-form.modal :id="'delete' . $item->id" :title="'Remove User'"
-                                                                    :action="route('admin.users.destroy', $item->id)" :method="'DELETE'">
+                                                                <x-form.modal :id="'delete' . $item->id" :title="'Remove type'"
+                                                                    :action="route('admin.types.destroy', $item->id)" :method="'DELETE'">
                                                                     <div class="col-12">
                                                                         {{ 'Are You Sure You Want To Remove' . '  ' . $item->name }}
                                                                     </div>
@@ -112,24 +119,24 @@
                 </div>
                 <!-- end row -->
 
-                <x-form.modal :id="'createNewUser'" :title="'Add User'" :action="route('admin.users.store')" :method="'POST'">
+                <x-form.modal :id="'createNewtype'" :title="'Add type'" :action="route('admin.types.store')" :method="'POST'">
                     <div class="col-4">
-                        <label for="name" class="form-label">user name</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="user name"
-                            required>
-                        <x-form.error :name="'name'" />
+                        <label for="title_en" class="form-label">type english name</label>
+                        <input type="text" id="title_en" name="title_en" class="form-control"
+                            placeholder="type english name" required>
+                        <x-form.error :name="'title_en'" />
                     </div>
                     <div class="col-4">
-                        <label for="email" class="form-label">email</label>
-                        <input type="email" id="email" name="email" class="form-control"
-                            placeholder=" Enter admin email" required>
-                        <x-form.error :name="'email'" />
+                        <label for="title_en" class="form-label">type arabic name</label>
+                        <input type="text" id="title_ar" name="title_ar" class="form-control"
+                            placeholder="type arabic name" required>
+                        <x-form.error :name="'title_ar'" />
                     </div>
                     <div class="col-4">
-                        <label for="password" class="form-label">password</label>
-                        <input type="password" id="password" name="password" class="form-control"
-                            placeholder="Enter Updated Password" value="" required>
-                        <x-form.error :name="'password'" />
+                        <label for="icon" class="form-label">icon</label>
+                        <input type="text" id="icon" name="icon" class="form-control"
+                            placeholder=" Enter admin icon" required>
+                        <x-form.error :name="'icon'" />
                     </div>
                 </x-form.modal>
             </div>

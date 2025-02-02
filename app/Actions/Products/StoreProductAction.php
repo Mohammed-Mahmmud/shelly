@@ -11,6 +11,7 @@ class StoreProductAction
     use ImageHelper;
     public function handle(array $data)
     {
+        // dd($data);
         $formattedData = [
             "title" => [
                 "en" => $data['title_en'],
@@ -30,20 +31,24 @@ class StoreProductAction
             ],
             "price" => $data['price']
         ];
-        $products = Product::create($formattedData);
+        $product = Product::create($formattedData);
         if (isset($data['images'])) {
             foreach ($data['images'] as $image) {
-                $this->StoreImage($image, $products, 'images');
+                $this->StoreImage($image, $product, 'images');
             }
         }
 
         if (isset($data['snippet_image'])) {
-            $this->StoreImage($data['snippet_image'], $products, 'snippet_image');
+            $this->StoreImage($data['snippet_image'], $product, 'snippet_image');
         }
+        $product->types()->attach($data['types']);
+        $product->categories()->attach($data['categories']);
+        $product->technologies()->attach($data['technologies']);
+        $product->productUsings()->attach($data['productUsings']);
 
-        ProductCreated::dispatch($products, $data['features'], $data['articles'], $type = 'create');
+        ProductCreated::dispatch($product, $data['features'], $data['articles'], $type = 'create');
 
         toastr('data has been saved', 'success', 'success');
-        return $products;
+        return $product;
     }
 }

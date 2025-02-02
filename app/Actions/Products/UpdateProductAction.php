@@ -42,6 +42,20 @@ class UpdateProductAction
         if (isset($data['snippet_image'])) {
             $this->UpdateImage($data['snippet_image'], $product, 'snippet_image');
         }
+
+        if (isset($data['types'])) {
+            $product->types()->sync($data['types']);
+        }
+        if (isset($data['categories'])) {
+            $product->categories()->sync($data['categories']);
+        }
+        if (isset($data['technologies'])) {
+            $product->technologies()->sync($data['technologies']);
+        }
+        if (isset($data['productUsings'])) {
+            $product->productUsings()->sync($data['productUsings']);
+        }
+
         ProductCreated::dispatch($product, $data['features'], $data['articles'], $type = 'edit');
         toastr('data has been updated', 'info', 'success');
         return $product;

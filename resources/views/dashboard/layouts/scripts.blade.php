@@ -10,7 +10,7 @@
      <script src="{{ asset('dashboard/assets/js/extensions/popper.min.js') }}"></script>
      <script src="{{ asset('dashboard/assets/js/extensions/flasher.min.js') }}"></script>
      <!-- Layout config Js -->
-     {{-- <script src="{{ asset('dashboard/assets/multiSelect/js/multiselect.js') }}"></script> --}}
+     <script src="{{ asset('dashboard/assets/multiSelect/js/multiselect.js') }}"></script>
      <script src="{{ asset('dashboard/assets/js/layout.js') }}"></script>
      <!-- App js -->
      <script src="{{ asset('dashboard/assets/js/app.js') }}"></script>

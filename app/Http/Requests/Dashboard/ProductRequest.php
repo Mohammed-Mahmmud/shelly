@@ -43,6 +43,11 @@ class ProductRequest extends FormRequest
             'snippet_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'features' =>  'nullable|string',
             'articles' =>  'nullable|string',
+            'types' =>  'nullable|string',
+            'categories' =>  'nullable|string',
+            'technologies' =>  'nullable|string',
+            'productUsings' =>  'nullable|string',
+
         ]);
     }
     public function validationUpdate()
@@ -62,6 +67,10 @@ class ProductRequest extends FormRequest
             'snippet_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'features' =>  'nullable|string',
             'articles' =>  'nullable|string',
+            'types' =>  'nullable|string',
+            'categories' =>  'nullable|string',
+            'technologies' =>  'nullable|string',
+            'productUsings' =>  'nullable|string',
 
         ]);
     }

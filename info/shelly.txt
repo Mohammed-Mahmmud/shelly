@@ -19,7 +19,7 @@ relation with table  technology     (M-N) -> [ [tile , icon], [tile , icon] ]  -
 
 filters (not yet)
 
-table categories    table product
+table categories    		table product
 prod -> M -> category
 Tag ->  M -> prod
 

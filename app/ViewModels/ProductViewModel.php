@@ -2,9 +2,14 @@
 
 namespace App\ViewModels;
 
+use App\Models\Category;
 use App\Models\Product;
-use Spatie\ViewModels\ViewModel;
+use App\Models\ProductUsing;
+use App\Models\Technology;
 use App\Models\TranslationKey;
+use App\Models\Type;
+use Illuminate\Support\Facades\DB;
+use Spatie\ViewModels\ViewModel;
 
 class ProductViewModel extends ViewModel
 {
@@ -27,5 +32,21 @@ class ProductViewModel extends ViewModel
     public function method(): string
     {
         return is_null($this->data->id) ? 'POST' : 'PUT';
+    }
+    public function categories()
+    {
+        return Category::get();
+    }
+    public function types()
+    {
+        return Type::get();
+    }
+    public function technologies()
+    {
+        return Technology::get();
+    }
+    public function productUsings()
+    {
+        return ProductUsing::get();
     }
 }
