@@ -23,20 +23,25 @@ class StoreProductFeatures
      */
     public function handle(ProductCreated $event): void
     {
+        // Remove old features if editing
         if ($event->type === 'edit') {
             $event->product->features()->delete();
         }
-        foreach ($event->features as $feature) {
-            Features::create([
+
+        // Prepare new features data
+        $features = collect($event->features)->map(function ($feature) use ($event) {
+            return [
                 'prod_id' => $event->product->id,
-                "title" =>
-                json_encode(
-                    [
-                        "en" => $feature['title_en'],
-                        "ar" => $feature['title_ar'],
-                    ]
-                ),
-            ]);
-        }
+                'title' => json_encode([
+                    'en' => $feature['title_en'],
+                    'ar' => $feature['title_ar'],
+                ]),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        })->toArray();
+
+        // Bulk insert new features
+        Features::insert($features);
     }
 }

@@ -12,7 +12,7 @@ class Type extends Model
     use HasFactory, HasTranslations;
     public $guarded = [];
     public $table = 'types';
-    public $timestamp = true;
+    public $timestamps = true;
     public $translatable = [
         'title',
         'icon'

@@ -15,7 +15,7 @@ class Features extends Model
         'desc',
     ];
     public $table = 'features';
-    public $timestamp = true;
+    public $timestamps = true;
     public function product()
     {
         return $this->belongsTo(Product::class, 'prod_id');

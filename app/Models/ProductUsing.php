@@ -14,7 +14,7 @@ class ProductUsing extends Model
     use HasFactory;
     public $guarded = [];
     public $table = 'usings';
-    public $timestamp = true;
+    public $timestamps = true;
     public $translatable = [
         'title',
         'icon'

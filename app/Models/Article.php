@@ -11,7 +11,7 @@ class Article extends Model
     use HasFactory;
     public $guarded = [];
     public $table = 'articles';
-    public $timestamp = true;
+    public $timestamps = true;
     public $translatable = [
         'title',
         'desc',

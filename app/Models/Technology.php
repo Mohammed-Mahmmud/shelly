@@ -12,7 +12,7 @@ class Technology extends Model
     use HasFactory, HasTranslations;
     public $guarded = [];
     public $table = 'technologies';
-    public $timestamp = true;
+    public $timestamps = true;
     public $translatable = [
         'title',
         'icon'

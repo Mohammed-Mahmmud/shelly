@@ -22,23 +22,29 @@ class StoreProductArticles
      */
     public function handle(ProductCreated $event): void
     {
+        // Remove old articles if editing
         if ($event->type === 'edit') {
             $event->product->articles()->delete();
         }
-        foreach ($event->articles as $article) {
-            Article::create([
+
+        // Prepare new articles data
+        $articles = collect($event->articles)->map(function ($article) use ($event) {
+            return [
                 'prod_id' => $event->product->id,
-                "title" => json_encode(
-                    [
-                        "en" => $article['title_en'],
-                        "ar" => $article['title_ar']
-                    ]
-                ),
-                "desc" => json_encode([
-                    "en" => $article['desc_en'],
-                    "ar" => $article['desc_ar']
+                'title' => json_encode([
+                    'en' => $article['title_en'],
+                    'ar' => $article['title_ar'],
                 ]),
-            ]);
-        }
+                'desc' => json_encode([
+                    'en' => $article['desc_en'],
+                    'ar' => $article['desc_ar'],
+                ]),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        })->toArray();
+
+        // Bulk insert new articles
+        Article::insert($articles);
     }
 }

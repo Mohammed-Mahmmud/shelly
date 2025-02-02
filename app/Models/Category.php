@@ -14,7 +14,7 @@ class Category extends Model implements HasMedia
     use HasFactory, HasTranslations, InteractsWithMedia;
     public $guarded = [];
     public $table = 'categories';
-    public $timestamp = true;
+    public $timestamps = true;
     public $translatable = [
         'title',
         'desc'
