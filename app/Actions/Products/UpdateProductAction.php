@@ -20,10 +20,7 @@ class UpdateProductAction
                 "en" => $data['desc_en'],
                 "ar" => $data['desc_ar']
             ],
-            "stock" => [
-                "en" => $data['stock_en'],
-                "ar" => $data['stock_ar']
-            ],
+            "stock" => $data['stock'],
             "long_desc" => [
                 "en" => $data['long_desc_en'],
                 "ar" => $data['long_desc_ar']
@@ -34,8 +31,8 @@ class UpdateProductAction
         $product->update($formattedData);
 
         if (isset($data['images'])) {
-            foreach ($data['images'] as $image) {
-                $this->UpdateImage($image, $product, 'images');
+            foreach ($data['images'] as $key => $image) {
+                $this->UpdateImage($image, $product, 'product-' . $key);
             }
         }
 

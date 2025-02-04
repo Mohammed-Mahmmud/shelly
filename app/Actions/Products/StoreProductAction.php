@@ -11,7 +11,6 @@ class StoreProductAction
     use ImageHelper;
     public function handle(array $data)
     {
-        // dd($data);
         $formattedData = [
             "title" => [
                 "en" => $data['title_en'],
@@ -21,10 +20,7 @@ class StoreProductAction
                 "en" => $data['desc_en'],
                 "ar" => $data['desc_ar']
             ],
-            "stock" => [
-                "en" => $data['stock_en'],
-                "ar" => $data['stock_ar']
-            ],
+            "stock" => $data['stock'],
             "long_desc" => [
                 "en" => $data['long_desc_en'],
                 "ar" => $data['long_desc_ar']
@@ -33,8 +29,8 @@ class StoreProductAction
         ];
         $product = Product::create($formattedData);
         if (isset($data['images'])) {
-            foreach ($data['images'] as $image) {
-                $this->StoreImage($image, $product, 'images');
+            foreach ($data['images'] as $key => $image) {
+                $this->StoreImage($image, $product, 'product-' . $key);
             }
         }
 

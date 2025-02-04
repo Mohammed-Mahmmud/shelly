@@ -34,14 +34,6 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
-
-                                                @foreach ($translation as $lang)
-                                                    <div class="col-6 mb-3">
-                                                        <x-form.input :name="'stock_' . $lang->key" :type="'text'"
-                                                            :label="'Enter stock in ' . $lang->name" :placeholder="'Please enter stock in ' . $lang->name" :value="$data->getTranslation('stock', $lang->key) ?? ''" />
-                                                    </div>
-                                                @endforeach
-
                                                 @foreach ($translation as $lang)
                                                     <div class="col-6">
                                                         <div class="mb-3 border rounded mt-2">
@@ -66,6 +58,11 @@
                                             <div class="col-6 mb-3">
                                                 <x-form.input :name="'price'" :type="'number'" :label="'Enter price'"
                                                     :placehlder="'Please enter price '" :value="$data->price ?? ''" />
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <x-form.select :value="$data->stock ?? ''" :array="App\Models\Product::STOCK" :label="'choose an option:'"
+                                                    :name="'stock'">
+                                                </x-form.select>
                                             </div>
                                         </div>
                                         <hr>

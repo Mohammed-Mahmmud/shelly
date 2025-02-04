@@ -11,14 +11,14 @@ class FrontController extends Controller
     public function index()
     {
         return ProductResource::collection(
-            Product::with('media')->paginate(10)
+            Product::paginate(10)
         );
     }
 
     public function show($id)
     {
         return ProductResource::make(
-            Product::with('media')->findOrFail($id)
+            Product::findOrFail($id)
         );
     }
 }

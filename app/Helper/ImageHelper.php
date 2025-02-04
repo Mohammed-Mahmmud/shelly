@@ -8,8 +8,7 @@ trait ImageHelper
     public function StoreImage($data, $model, $nameImage)
     {
         if (!empty($data)) {
-            $optimizedImage = $data;
-            $model->addMedia($optimizedImage)->toMediaCollection($nameImage);
+            $model->addMedia($data)->toMediaCollection($nameImage);
         }
     }
     //If No multi images
@@ -17,9 +16,8 @@ trait ImageHelper
     public function UpdateImage($data, $model, $nameImage)
     {
         if (!empty($data)) {
-            $optimizedImage = $data;
             $model->clearMediaCollection($nameImage);
-            $model->addMedia($optimizedImage)->toMediaCollection($nameImage);
+            $model->addMedia($data)->toMediaCollection($nameImage);
         }
     }
 

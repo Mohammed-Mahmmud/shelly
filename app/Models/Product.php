@@ -15,6 +15,7 @@ use Spatie\Translatable\HasTranslations;
 class Product extends Model implements HasMedia
 {
     use HasFactory, HasTranslations, InteractsWithMedia;
+    const STOCK = ['in stock', 'out of stock'];
     public $guarded = [];
     public $table = 'products';
     public $timestamps = true;
@@ -22,8 +23,6 @@ class Product extends Model implements HasMedia
         'title',
         'desc',
         'long_desc',
-        'stock',
-        'price'
     ];
     public function features()
     {
