@@ -1,7 +1,7 @@
 <div>
     <label for="{{ $name }}" class="form-label">{{ ucfirst($label) }}</label>
-    <select name="{{ $name }}" data-placeholder="Choose an Option" multiselect-select-all="true"
-        id="{{ $name }}" class="form-control">
+    <select name="{{ $name }}" id="{{ $name }}-id" class="form-control">
+        <option disabled> Choose An Option</option>
         @foreach ($array as $item)
             <option value="{{ $item }}" @if ($item == $value) selected @endif>
                 {{ ucwords($item) }}</option>

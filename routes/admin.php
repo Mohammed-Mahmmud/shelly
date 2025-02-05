@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\PageController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProductUsingController;
 use App\Http\Controllers\Dashboard\TechnologyController;
 use App\Http\Controllers\Dashboard\TypeController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -43,6 +45,7 @@ Route::group(
             Route::resource('Product/Types', TypeController::class)->names('types');
             Route::resource('Product/Technologies', TechnologyController::class)->names('technologies');
             Route::resource('Product/Using', ProductUsingController::class)->names('product-using');
+            Route::resource('Pages', PageController::class)->names('pages');
         });
     }
 );

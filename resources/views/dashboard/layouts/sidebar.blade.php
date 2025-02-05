@@ -63,6 +63,11 @@
                         <i class=" bx bx-book-content"></i>
                         <span data-key="t-calendar">Product-Using</span> </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.pages.index') }}" class="nav-link menu-link @yield('pages-active')">
+                        <i class=" bx bx-book-content"></i>
+                        <span data-key="t-calendar">Pages</span> </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->
