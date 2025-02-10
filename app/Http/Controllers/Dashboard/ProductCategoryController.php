@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Actions\Category\StoreCategoryAction;
-use App\Actions\Products\UpdateCategoryAction;
+use App\Actions\Category\UpdateCategoryAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\ViewModels\CategoryViewModel;
 use Exception;
 
-class CategoryController extends Controller
+class ProductCategoryController extends Controller
 {
     public $model, $view, $indexRoute;
     public function __construct()
     {
         $this->model = new Category();
         $this->view = 'categories';
-        $this->indexRoute = 'admin.categories.index';
+        $this->indexRoute = 'admin.product.categories.index';
     }
     public function index()
     {

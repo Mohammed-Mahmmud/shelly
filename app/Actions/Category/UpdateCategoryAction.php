@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Products;
+namespace App\Actions\Category;
 
 use App\Helper\ImageHelper;
 use App\Models\Category;

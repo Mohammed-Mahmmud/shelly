@@ -38,35 +38,53 @@
                             class="bx bx-user-circle"></i>
                         <span data-key="t-calendar">Admins</span> </a>
                 </li>
+                {{-- Product --}}
                 <li class="nav-item">
-                    <a href="{{ route('admin.products.index') }}" class="nav-link menu-link @yield('products-active')"> <i
-                            class=" bx bx-book-content"></i>
-                        <span data-key="t-calendar">Products</span> </a>
+                    <a href="#sidebarProducts" class="nav-link menu-link collapsed" data-bs-toggle="collapse"
+                        role="button" aria-expanded="true" aria-controls="sidebarProducts">
+                        <i class="ph-storefront"></i> <span data-key="t-product">Products</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarProducts">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.products.index') }}" class="nav-link  @yield('products-active')">View
+                                    Products</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('admin.product.categories.index') }}"
+                                    class="nav-link @yield('product-categories-active')">
+                                    <span>Product Categories</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.product.types.index') }}" class="nav-link @yield('types-active')">
+                                    <span>Product Types</span> </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.product.technologies.index') }}"
+                                    class="nav-link @yield('technologies-active')">
+                                    <span>Product Technologies</span> </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.product.using.index') }}" class="nav-link @yield('product-using-active')">
+                                    <span>Product Using</span> </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.categories.index') }}" class="nav-link menu-link @yield('categories-active')"> <i
-                            class=" bx bx-book-content"></i>
-                        <span data-key="t-calendar">Categories</span> </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.types.index') }}" class="nav-link menu-link @yield('types-active')"> <i
-                            class=" bx bx-book-content"></i>
-                        <span data-key="t-calendar">Types</span> </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.technologies.index') }}" class="nav-link menu-link @yield('technologies-active')"> <i
-                            class=" bx bx-book-content"></i>
-                        <span data-key="t-calendar">Technologies</span> </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.product-using.index') }}" class="nav-link menu-link @yield('product-using-active')">
-                        <i class=" bx bx-book-content"></i>
-                        <span data-key="t-calendar">Product-Using</span> </a>
-                </li>
+
+                {{-- Pages --}}
                 <li class="nav-item">
                     <a href="{{ route('admin.pages.index') }}" class="nav-link menu-link @yield('pages-active')">
-                        <i class=" bx bx-book-content"></i>
-                        <span data-key="t-calendar">Pages</span> </a>
+                        <i class="bx bx-file"></i>
+                        <span>Pages</span> </a>
+                </li>
+
+                {{-- solutions --}}
+                <li class="nav-item">
+                    <a href="{{ route('admin.solutions.index') }}" class="nav-link menu-link @yield('solutions-active')">
+                        <i class="bx bx-file"></i>
+                        <span>Solutions</span> </a>
                 </li>
             </ul>
         </div>

@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 @section('title', ucfirst($type) . ' category')
-@section('categories-active', 'activeSidebar')
+@section('product-categories-active', 'activeSidebar')
 @section('css')
 @endsection
 @section('content')

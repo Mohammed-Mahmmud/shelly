@@ -41,7 +41,6 @@ class Product extends Model implements HasMedia
     {
         return $this->belongsToMany(Type::class, 'product_type', 'product_id', 'type_id');
     }
-
     public function technologies()
     {
         return $this->belongsToMany(Technology::class, 'product_technology', 'product_id', 'technology_id');

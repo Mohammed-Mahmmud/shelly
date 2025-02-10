@@ -14,15 +14,15 @@ class CategoryViewModel extends ViewModel
         $this->data = is_null($data) ? new Category(old()) : $data;
         $this->type = is_null($data) ? 'create' : 'edit';
         $this->translation = TranslationKey::get();
-        $this->routeCreate = route('admin.categories.create');
-        $this->routeView = route('admin.categories.index');
+        $this->routeCreate = route('admin.product.categories.create');
+        $this->routeView = route('admin.product.categories.index');
         $this->views = 'categories';
     }
     public function action(): string
     {
         return is_null($this->data->id)
-            ? route('admin.' . $this->views . '.store')
-            : route('admin.' . $this->views . '.update', $this->data->id);
+            ? route('admin.product.' . $this->views . '.store')
+            : route('admin.product.' . $this->views . '.update', $this->data->id);
     }
     public function method(): string
     {

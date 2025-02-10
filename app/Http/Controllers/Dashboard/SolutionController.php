@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Actions\Products\StoreProductAction;
-use App\Actions\Products\UpdateProductAction;
+use App\Actions\Solutions\StoreSolutionAction;
+use App\Actions\Solutions\UpdateSolutionAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProductRequest;
-use App\Models\Product;
-use App\ViewModels\ProductViewModel;
+use App\Http\Requests\SolutionRequest;
+use App\Models\Solution;
+use App\ViewModels\SolutionViewModel;
 use Exception;
 
-class ProductController extends Controller
+class SolutionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class ProductController extends Controller
     public $model, $view, $indexRoute;
     public function __construct()
     {
-        $this->model = new Product();
-        $this->view = 'products';
-        $this->indexRoute = 'admin.products.index';
+        $this->model = new Solution();
+        $this->view = 'solutions';
+        $this->indexRoute = 'admin.solutions.index';
     }
     public function index()
     {
@@ -38,7 +38,7 @@ class ProductController extends Controller
     public function create()
     {
         try {
-            return view('dashboard.pages.' . $this->view . '.crud', new ProductViewModel());
+            return view('dashboard.pages.' . $this->view . '.crud', new SolutionViewModel());
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -47,10 +47,10 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductRequest $request)
+    public function store(SolutionRequest $request)
     {
         try {
-            app(StoreProductAction::class)->handle($request->validationStore()->validated());
+            app(StoreSolutionAction::class)->handle($request->validationStore()->validated());
             return redirect()->route($this->indexRoute);
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -72,7 +72,7 @@ class ProductController extends Controller
     {
         try {
             $data = $this->model::findOrFail($id);
-            return view("dashboard.pages.$this->view.crud", new ProductViewModel($data));
+            return view("dashboard.pages.$this->view.crud", new SolutionViewModel($data));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -81,11 +81,11 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductRequest $request, string $id)
+    public function update(SolutionRequest $request, string $id)
     {
         try {
             $product = $this->model::findOrFail($id);
-            app(UpdateProductAction::class)->handle($product, $request->validationUpdate()->validated());
+            app(UpdateSolutionAction::class)->handle($product, $request->validationUpdate()->validated());
             return redirect()->route($this->indexRoute);
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

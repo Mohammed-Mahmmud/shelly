@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Actions\Users\StoreUserAction;
 use App\Actions\Users\UpdateUserAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Users\UserRequest;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\App;

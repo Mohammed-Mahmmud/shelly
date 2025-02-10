@@ -14,8 +14,9 @@
                             <div class="card-header">
                                 <div class="row g-1 mb-0">
                                     <div class="col-sm-auto">
-                                        <a class="btn btn-success add-btn" href="{{ route('admin.technologies.create') }}"
-                                            data-bs-toggle="modal" data-bs-target="#createNewtechnology">add technology</a>
+                                        <a class="btn btn-success add-btn"
+                                            href="{{ route('admin.product.technologies.create') }}" data-bs-toggle="modal"
+                                            data-bs-target="#createNewtechnology">add technology</a>
                                     </div>
                                 </div>
                             </div><!-- end card header -->
@@ -59,7 +60,7 @@
 
                                                                 <x-form.modal :id="'edit' . $item->id" :title="'update technology'"
                                                                     :action="route(
-                                                                        'admin.technologies.update',
+                                                                        'admin.product.technologies.update',
                                                                         $item->id,
                                                                     )" :method="'PUT'">
                                                                     <div class="col-4">
@@ -102,7 +103,7 @@
                                                                 </div>
                                                                 <x-form.modal :id="'delete' . $item->id" :title="'Remove technology'"
                                                                     :action="route(
-                                                                        'admin.technologies.destroy',
+                                                                        'admin.product.technologies.destroy',
                                                                         $item->id,
                                                                     )" :method="'DELETE'">
                                                                     <div class="col-12">
@@ -125,7 +126,7 @@
                 </div>
                 <!-- end row -->
 
-                <x-form.modal :id="'createNewtechnology'" :title="'Add technology'" :action="route('admin.technologies.store')" :method="'POST'">
+                <x-form.modal :id="'createNewtechnology'" :title="'Add technology'" :action="route('admin.product.technologies.store')" :method="'POST'">
                     <div class="col-4">
                         <label for="title_en" class="form-label">technology english name</label>
                         <input technology="text" id="title_en" name="title_en" class="form-control"

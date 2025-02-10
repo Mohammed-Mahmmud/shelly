@@ -2,10 +2,8 @@
 
 namespace App\Actions\Category;
 
-use App\Events\Dashboard\ProductCreated;
 use App\Helper\ImageHelper;
 use App\Models\Category;
-use App\Models\Product;
 
 class StoreCategoryAction
 {

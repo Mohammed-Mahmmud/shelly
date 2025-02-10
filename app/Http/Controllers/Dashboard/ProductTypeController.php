@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\TechnologyRequest;
-use App\Models\Technology;
+use App\Http\Requests\TypeRequest;
+use App\Models\Type;
 use Exception;
 
-class TechnologyController extends Controller
+class ProductTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class TechnologyController extends Controller
     public $view, $model, $indexRoute;
     public function __construct()
     {
-        $this->view = "technologies";
-        $this->indexRoute = "admin.technologies.index";
-        $this->model = new Technology();
+        $this->view = "types";
+        $this->indexRoute = "admin.product.types.index";
+        $this->model = new Type();
     }
     public function index()
     {
@@ -29,7 +29,7 @@ class TechnologyController extends Controller
         }
     }
 
-    public function store(TechnologyRequest $request)
+    public function store(TypeRequest $request)
     {
         try {
             $data = $request->validationStore()->validated();
@@ -52,7 +52,7 @@ class TechnologyController extends Controller
      * Display the specified resource.
      */
 
-    public function update(TechnologyRequest $request, $id)
+    public function update(TypeRequest $request, $id)
     {
         try {
 

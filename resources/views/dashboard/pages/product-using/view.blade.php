@@ -14,7 +14,7 @@
                             <div class="card-header">
                                 <div class="row g-1 mb-0">
                                     <div class="col-sm-auto">
-                                        <a class="btn btn-success add-btn" href="{{ route('admin.product-using.create') }}"
+                                        <a class="btn btn-success add-btn" href="{{ route('admin.product.using.create') }}"
                                             data-bs-toggle="modal" data-bs-target="#createNewproduct-using">add
                                             product-using</a>
                                     </div>
@@ -60,7 +60,7 @@
 
                                                                 <x-form.modal :id="'edit' . $item->id" :title="'update product-using'"
                                                                     :action="route(
-                                                                        'admin.product-using.update',
+                                                                        'admin.product.using.update',
                                                                         $item->id,
                                                                     )" :method="'PUT'">
                                                                     <div class="col-4">
@@ -105,7 +105,7 @@
                                                                 </div>
                                                                 <x-form.modal :id="'delete' . $item->id" :title="'Remove product-using'"
                                                                     :action="route(
-                                                                        'admin.product-using.destroy',
+                                                                        'admin.product.using.destroy',
                                                                         $item->id,
                                                                     )" :method="'DELETE'">
                                                                     <div class="col-12">
@@ -128,7 +128,7 @@
                 </div>
                 <!-- end row -->
 
-                <x-form.modal :id="'createNewproduct-using'" :title="'Add product-using'" :action="route('admin.product-using.store')" :method="'POST'">
+                <x-form.modal :id="'createNewproduct-using'" :title="'Add product-using'" :action="route('admin.product.using.store')" :method="'POST'">
                     <div class="col-4">
                         <label for="title_en" class="form-label">product-using english name</label>
                         <input product-using="text" id="title_en" name="title_en" class="form-control"

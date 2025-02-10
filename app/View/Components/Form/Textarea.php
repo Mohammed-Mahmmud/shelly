@@ -11,8 +11,8 @@ class Textarea extends Component
     /**
      * Create a new component instance.
      */
-    public $name,  $class, $style, $placeholder, $value, $required, $label, $rows;
-    public function __construct($name, $rows = null, $class = null, $style = null, $placeholder = null, $value = null, $required = false, $label = false)
+    public $name,  $class, $id, $style, $placeholder, $value, $required, $label, $rows;
+    public function __construct($name, $rows = null, $id = null, $class = null, $style = null, $placeholder = null, $value = null, $required = false, $label = false)
     {
         $this->name = $name;
         $this->class = $class;
@@ -22,6 +22,7 @@ class Textarea extends Component
         $this->required = $required;
         $this->label = $label;
         $this->rows = $rows;
+        $this->id = $id ?? $name . '_' . uniqid();
     }
 
     /**

@@ -16,7 +16,7 @@ class ProductUsingController extends Controller
     public function __construct()
     {
         $this->view = "product-using";
-        $this->indexRoute = "admin.product-using.index";
+        $this->indexRoute = "admin.product.using.index";
         $this->model = new ProductUsing();
     }
     public function index()
