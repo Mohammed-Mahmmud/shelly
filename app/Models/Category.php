@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Product;
+use App\Models\Solution;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -22,5 +23,9 @@ class Category extends Model implements HasMedia
     public function products()
     {
         return $this->belongsToMany(Product::class);
+    }
+    public function solutions()
+    {
+        return $this->belongsToMany(Solution::class);
     }
 }

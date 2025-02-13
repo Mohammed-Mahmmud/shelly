@@ -5,6 +5,7 @@ namespace App\ViewModels;
 use App\Models\Category;
 use App\Models\Solution;
 use App\Models\TranslationKey;
+use App\Models\Type;
 use Spatie\ViewModels\ViewModel;
 
 class SolutionViewModel extends ViewModel
@@ -28,6 +29,10 @@ class SolutionViewModel extends ViewModel
     public function method(): string
     {
         return is_null($this->data->id) ? 'POST' : 'PUT';
+    }
+    public function types()
+    {
+        return Type::get();
     }
     public function categories()
     {

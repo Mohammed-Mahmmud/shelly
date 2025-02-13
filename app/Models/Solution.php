@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Category;
+use App\Models\Type;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -20,6 +21,10 @@ class Solution extends Model implements HasMedia
         'title',
         'desc',
     ];
+    public function types()
+    {
+        return $this->belongsToMany(Type::class, 'solution_type', 'solution_id', 'type_id');
+    }
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'solution_category', 'solution_id', 'category_id');

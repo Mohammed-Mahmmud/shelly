@@ -27,8 +27,8 @@
     </div>
 </div>
 
-@section('js')
+{{-- @push('js')
     <script src="{{ asset('dashboard/layouts/formRepeater/js/js.js') }}"></script>
     <script src="{{ asset('dashboard/layouts/formRepeater/js/jquery.min.js') }}"></script>
     <script src="{{ asset('dashboard/layouts/formRepeater/js/jquery.repeater.min.js') }}"></script>
-@endsection
+@endpush --}}

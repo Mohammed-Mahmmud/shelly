@@ -2,50 +2,36 @@
 
 namespace App\Actions\Solutions;
 
-use App\Events\Dashboard\ProductCreated;
 use App\Helper\ImageHelper;
-use App\Models\Product;
+use App\Models\Solution;
 
 class StoreSolutionAction
 {
     use ImageHelper;
     public function handle(array $data)
     {
-        dd($data);
-        $formattedData = [
-            "title" => [
-                "en" => $data['title_en'],
-                "ar" => $data['title_ar']
-            ],
-            "desc" => [
-                "en" => $data['desc_en'],
-                "ar" => $data['desc_ar']
-            ],
-            "stock" => $data['stock'],
-            "long_desc" => [
-                "en" => $data['long_desc_en'],
-                "ar" => $data['long_desc_ar']
-            ],
-            "price" => $data['price']
-        ];
-        $product = Product::create($formattedData);
-        if (isset($data['images'])) {
-            foreach ($data['images'] as $key => $image) {
-                $this->StoreImage($image, $product, 'product-' . $key);
+        foreach ($data['content'] as $content) {
+            $formattedcontent = [
+                "title" => [
+                    "en" => $content['title_en'],
+                    "ar" => $content['title_ar']
+                ],
+                "desc" => [
+                    "en" => $content['desc_en'],
+                    "ar" => $content['desc_ar']
+                ],
+                'slug' => $data['slug']
+            ];
+            $solution = Solution::create($formattedcontent);
+            if (isset($content['media'])) {
+                foreach ($content['media'] as $key => $image) {
+                    $this->StoreImage($image, $solution, $content['title_en'] . '-' . $key);
+                }
             }
+            $solution->types()->attach($content['types']);
         }
-
-        if (isset($data['snippet_image'])) {
-            $this->StoreImage($data['snippet_image'], $product, 'snippet_image');
-        }
-        $product->types()->attach($data['types']);
-        $product->categories()->attach($data['categories']);
-        $product->technologies()->attach($data['technologies']);
-        $product->productUsings()->attach($data['productUsings']);
-
-        ProductCreated::dispatch($product, $data['features'], $data['articles'], $type = 'create');
-
+        $solution->categories()->attach($data['categories']);
         toastr('data has been saved', 'success', 'success');
-        return $product;
+        return redirect()->back();
     }
 }

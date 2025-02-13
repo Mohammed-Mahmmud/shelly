@@ -139,8 +139,10 @@
                                                                                     :type="'text'" :label="'Enter features title in ' .
                                                                                         $lang->name"
                                                                                     :placeholder="'Please enter features title in ' .
-                                                                                        $lang->name" :value="json_decode($item->title)
-                                                                                        ->{$lang->key} ?? ''" />
+                                                                                        $lang->name" :value="$item->getTranslation(
+                                                                                        'title',
+                                                                                        $lang->key,
+                                                                                    ) ?? ''" />
                                                                             </div>
                                                                         @endforeach
                                                                     </div>
@@ -186,8 +188,10 @@
                                                                                     :type="'text'" :label="'Enter articles title in ' .
                                                                                         $lang->name"
                                                                                     :placeholder="'Please enter articles title in ' .
-                                                                                        $lang->name" :value="json_decode($item->title)
-                                                                                        ->{$lang->key} ?? ''" />
+                                                                                        $lang->name" :value="$item->getTranslation(
+                                                                                        'title',
+                                                                                        $lang->key,
+                                                                                    ) ?? ''" />
                                                                             </div>
                                                                         @endforeach
                                                                         @foreach ($translation as $lang)
@@ -205,9 +209,10 @@
                                                                                             ']'"
                                                                                         :label="'Please enter articles description in ' .
                                                                                             $lang->name"
-                                                                                        :value="json_decode(
-                                                                                            $item->desc,
-                                                                                        )->{$lang->key} ?? ''" />
+                                                                                        :value="$item->getTranslation(
+                                                                                            'desc',
+                                                                                            $lang->key,
+                                                                                        ) ?? ''" />
                                                                                 </div>
                                                                             </div>
                                                                         @endforeach
@@ -268,9 +273,4 @@
             </div>
         </div>
     </div>
-@endsection
-@section('js')
-    <script src="{{ asset('dashboard/layouts/formRepeater/js/js.js') }}"></script>
-    <script src="{{ asset('dashboard/layouts/formRepeater/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('dashboard/layouts/formRepeater/js/jquery.repeater.min.js') }}"></script>
 @endsection

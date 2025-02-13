@@ -39,8 +39,9 @@
                                                             <td>{{ $loop->iteration }}</td>
                                                             <td>{{ $item->title }}</td>
                                                             <td>
-                                                                <img src="{{ $item->getFirstMediaUrl('snippet_image') }}"
-                                                                    height="50px" width="100px" alt="snippet image">
+                                                                {{-- @dump($item->getFirstMediaUrl($item->title . '-0')) --}}
+                                                                <x-form.preview-image :image="$item->getFirstMediaUrl($item->title . '-0')" :height="'50px'"
+                                                                    :width="'100px'" :alt="$item->title" />
                                                             </td>
                                                             <td>
                                                                 <div class="d-flex gap-2">

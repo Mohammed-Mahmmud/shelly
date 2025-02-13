@@ -29,5 +29,11 @@
      <script src="{{ asset('dashboard/assets/js/pages/listjs.init.js') }}"></script>
      <!-- ckeditor -->
      <script src="{{ asset('dashboard/assets/libs/ckeditor/build/ckeditor.js') }}"></script>
-     <script src="{{ asset('dashboard/assets/js/pages/form-editor.init.js') }}"></script>
+     {{-- <script src="{{ asset('dashboard/assets/js/pages/form-editor.init.js') }}"></script> --}}
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.min.js"></script>
+     <script src="{{ asset('dashboard/layouts/code/script.js') }}"></script>
+
      @yield('js')
+     @stack('js')

@@ -18,141 +18,105 @@
                                     <x-form.form :action="$action" :method="$method" :enctype="'multipart/form-data'">
                                         <div class="row">
                                             @if ($type == 'create')
-                                                <x-form.repeater :name="'content'">
-                                                    <div class="row">
-                                                        <div class="col-12 mb-3">
-                                                            <x-form.input :name="'media'" :type="'file'"
-                                                                :multiple="'true'" :label="'Upload Image or Video'" :placehlder="'Please upload an image or video'"
-                                                                :accept="'image/*,video/*'" :value="$data->getMedia('media') ?? ''" />
-                                                        </div>
+                                                <div class="repeater">
+                                                    <div data-repeater-list="content">
+                                                        <div data-repeater-item>
+                                                            <div class="row">
+                                                                <div class="col-6 mb-3">
+                                                                    <x-form.input :name="'media'" :type="'file'"
+                                                                        :multiple="'true'" :label="'Upload Image or Video'"
+                                                                        :placehlder="'Please upload an image or video'" :accept="'image/*,video/*'" />
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <x-form.dropdown :value="$data->types->pluck('id')->toArray() ??
+                                                                        ''" :array="$types"
+                                                                        :label="'Choose types:'" :name="'types'">
+                                                                    </x-form.dropdown>
+                                                                </div>
 
-                                                        @foreach ($translation as $lang)
-                                                            <div class="col-6">
-                                                                <x-form.input :name="'content[0]' .
-                                                                    '[' .
-                                                                    'title_' .
-                                                                    $lang->key .
-                                                                    ']'" :type="'text'"
-                                                                    :label="'Enter content title in ' . $lang->name" :placeholder="'Please enter content title in ' .
+                                                                @foreach ($translation as $lang)
+                                                                    <div class="col-6">
+                                                                        <x-form.input :name="'title_' . $lang->key" :type="'text'"
+                                                                            :label="'Enter content title in ' .
+                                                                                $lang->name" :placeholder="'Please enter content title in ' .
+                                                                                $lang->name"
+                                                                            :value="$data->getTranslation(
+                                                                                'title',
+                                                                                $lang->key,
+                                                                            ) ?? ''" />
+                                                                    </div>
+                                                                @endforeach
+
+                                                                @foreach ($translation as $lang)
+                                                                    <div class="col-6">
+                                                                        <div class="mb-3 border rounded mt-2">
+                                                                            <x-form.textarea :id="'ckeditor-' .
+                                                                                $lang->key .
+                                                                                uniqId()"
+                                                                                :class="'ckeditor'" :name="'desc_' . $lang->key"
+                                                                                :label="'Please enter content description in ' .
+                                                                                    $lang->name" :value="$data->getTranslation(
+                                                                                    'desc',
+                                                                                    $lang->key,
+                                                                                ) ?? ''" />
+                                                                        </div>
+                                                                    </div>
+                                                                @endforeach
+
+                                                                <div class="col-12 mt-2">
+                                                                    <button data-repeater-delete type="button"
+                                                                        class="btn btn-danger">Remove</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button data-repeater-create type="button"
+                                                        class="btn btn-primary mt-3">Add
+                                                        More</button>
+                                                </div>
+                                            @elseif($type == 'edit')
+                                                <div class="row">
+                                                    <div class="col-6 mb-3">
+                                                        <x-form.input :name="'media'" :type="'file'"
+                                                            :multiple="'true'" :label="'Upload Image or Video'" :placehlder="'Please upload an image or video'"
+                                                            :accept="'image/*,video/*'" />
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <x-form.dropdown :value="$data->types->pluck('id')->toArray() ?? ''" :array="$types"
+                                                            :label="'Choose types:'" :name="'types'">
+                                                        </x-form.dropdown>
+                                                    </div>
+
+                                                    @foreach ($translation as $lang)
+                                                        <div class="col-6">
+                                                            <x-form.input :name="'title_' . $lang->key" :type="'text'"
+                                                                :label="'Enter content title in ' . $lang->name" :placeholder="'Please enter content title in ' .
+                                                                    $lang->name" :value="$data->getTranslation('title', $lang->key) ??
+                                                                    ''" />
+                                                        </div>
+                                                    @endforeach
+
+                                                    @foreach ($translation as $lang)
+                                                        <div class="col-6">
+                                                            <div class="mb-3 border rounded mt-2">
+                                                                <x-form.textarea :id="'ckeditor-' . $lang->key . uniqId()" :class="'ckeditor'"
+                                                                    :name="'desc_' . $lang->key" :label="'Please enter content description in ' .
                                                                         $lang->name"
                                                                     :value="$data->getTranslation(
-                                                                        'title',
+                                                                        'desc',
                                                                         $lang->key,
                                                                     ) ?? ''" />
                                                             </div>
-                                                        @endforeach
-                                                        @foreach ($translation as $lang)
-                                                            <div class="col-6">
-                                                                <div class="mb-3 border rounded mt-2">
-                                                                    <x-form.textarea :id="'ckeditor-' . '0-' . $lang->key" :class="'ckeditor'"
-                                                                        :name="'content[0]' .
-                                                                            '[' .
-                                                                            'desc_' .
-                                                                            $lang->key .
-                                                                            ']'" :label="'Please enter content description in ' .
-                                                                            $lang->name"
-                                                                        :value="$data->getTranslation(
-                                                                            'desc',
-                                                                            $lang->key,
-                                                                        ) ?? ''" />
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                </x-form.repeater>
-                                            @elseif($type == 'edit')
-                                                <div class="col-12 mb-3">
-                                                    <x-form.input :name="'media'" :multiple="'true'" :type="'file'"
-                                                        :label="'Upload Image or Video'" :placehlder="'Please upload an image or video'" :accept="'image/*,video/*'" />
-                                                </div>
-                                                <hr>
-                                                <div class="repeater-component">
-                                                    <div class="repeater">
-                                                        <div class="repeater-default" data-repeater-list="content">
-                                                            @foreach ($data->content as $index => $item)
-                                                                <div class="row" data-repeater-item>
-                                                                    <div class="col-11">
-                                                                        <div class="row">
-                                                                            <div class="col-12">
-                                                                                <x-form.input :name="'media'"
-                                                                                    :type="'file'" :label="'Upload Image or Video'"
-                                                                                    :placehlder="'Please upload an image or video'" :accept="'image/*,video/*'"
-                                                                                    :value="$data->getMedia(
-                                                                                        'media',
-                                                                                    ) ?? ''" />
-                                                                            </div>
-                                                                            @foreach ($translation as $lang)
-                                                                                <div class="col-6">
-                                                                                    <x-form.input :name="'content[' .
-                                                                                        $index .
-                                                                                        '][' .
-                                                                                        'title_' .
-                                                                                        $lang->key .
-                                                                                        ']'"
-                                                                                        :type="'text'"
-                                                                                        :label="'Enter content title in ' .
-                                                                                            $lang->name"
-                                                                                        :placeholder="'Please enter content title in ' .
-                                                                                            $lang->name"
-                                                                                        :value="json_decode(
-                                                                                            $item->title,
-                                                                                        )->{$lang->key} ?? ''" />
-                                                                                </div>
-                                                                            @endforeach
-                                                                            @foreach ($translation as $lang)
-                                                                                <div class="col-6">
-                                                                                    <div class="mb-3 border rounded mt-2">
-                                                                                        <x-form.textarea :id="'ckeditor-' .
-                                                                                            $index .
-                                                                                            '-' .
-                                                                                            $lang->key"
-                                                                                            :class="'ckeditor'"
-                                                                                            :name="'content[' .
-                                                                                                $index .
-                                                                                                ']' .
-                                                                                                '[' .
-                                                                                                'desc_' .
-                                                                                                $lang->key .
-                                                                                                ']'"
-                                                                                            :label="'Please enter content description in ' .
-                                                                                                $lang->name"
-                                                                                            :value="$data->getTranslation(
-                                                                                                'desc',
-                                                                                                $lang->key,
-                                                                                            ) ?? ''" />
-                                                                                    </div>
-                                                                                </div>
-                                                                            @endforeach
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <div class="hstack gap-2 justify-content-end">
-                                                                            <a href="javascript:;" data-repeater-delete=""
-                                                                                class="btn btn-md font-weight-bolder btn-outline-danger">
-                                                                                <i class="la la-close"></i>delete
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            @endforeach
                                                         </div>
-                                                        <!-- Repeater Add Button -->
-                                                        <div class="col-lg-6">
-                                                            <div class="hstack gap-2 justify-content-end">
-                                                                <a href="javascript:;" data-repeater-create=""
-                                                                    class="btn btn-md font-weight-bolder btn-outline-dark">
-                                                                    <i class="la la-plus"></i>Add
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    @endforeach
                                                 </div>
                                             @endif
                                         </div>
+
                                         <hr>
                                         <div class="row">
                                             <div class="col-6">
-                                                <x-form.dropdown :value="$data->categories->pluck('id')->toArray() ?? ''" :array="$categories" :label="'choose categories:'"
+                                                <x-form.dropdown :value="$data->categories->pluck('id')->toArray() ?? ''" :array="$categories" :label="'Choose categories:'"
                                                     :name="'categories'">
                                                 </x-form.dropdown>
                                             </div>
@@ -162,6 +126,7 @@
                                             </div>
                                         </div>
                                     </x-form.form>
+
                                 </div>
                             </div>
                         </div>
@@ -171,8 +136,8 @@
         </div>
     </div>
 @endsection
-@section('js')
-    <script src="{{ asset('dashboard/layouts/formRepeater/js/js.js') }}"></script>
-    <script src="{{ asset('dashboard/layouts/formRepeater/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('dashboard/layouts/formRepeater/js/jquery.repeater.min.js') }}"></script>
-@endsection
+@push('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.min.js"></script>
+    <script src="{{ asset('dashboard/layouts/code/script.js') }}"></script>
+@endpush

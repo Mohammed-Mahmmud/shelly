@@ -2,15 +2,17 @@
 
 namespace App\Actions\Solutions;
 
-use App\Events\Dashboard\ProductCreated;
+use App\Models\Solution;
 use App\Helper\ImageHelper;
-use App\Models\Product;
 
 class UpdateSolutionAction
 {
     use ImageHelper;
-    public function handle(Product $product, array $data)
+
+    public function handle(Solution $solution, array $data)
     {
+        // dd($data);
+
         $formattedData = [
             "title" => [
                 "en" => $data['title_en'],
@@ -20,41 +22,19 @@ class UpdateSolutionAction
                 "en" => $data['desc_en'],
                 "ar" => $data['desc_ar']
             ],
-            "stock" => $data['stock'],
-            "long_desc" => [
-                "en" => $data['long_desc_en'],
-                "ar" => $data['long_desc_ar']
-            ],
-            "price" => $data['price']
+            'slug' => $data['slug']
         ];
-
-        $product->update($formattedData);
-
-        if (isset($data['images'])) {
-            foreach ($data['images'] as $key => $image) {
-                $this->UpdateImage($image, $product, 'product-' . $key);
+        $solution->update($formattedData);
+        if (isset($data['media'])) {
+            foreach ($data['media'] as $key => $image) {
+                $this->UpdateImage($image, $solution, $data['title_en'] . '-' . $key);
             }
         }
+        $solution->types()->sync($data['types']);
 
-        if (isset($data['snippet_image'])) {
-            $this->UpdateImage($data['snippet_image'], $product, 'snippet_image');
-        }
+        $solution->categories()->sync($data['categories']);
 
-        if (isset($data['types'])) {
-            $product->types()->sync($data['types']);
-        }
-        if (isset($data['categories'])) {
-            $product->categories()->sync($data['categories']);
-        }
-        if (isset($data['technologies'])) {
-            $product->technologies()->sync($data['technologies']);
-        }
-        if (isset($data['productUsings'])) {
-            $product->productUsings()->sync($data['productUsings']);
-        }
-
-        ProductCreated::dispatch($product, $data['features'], $data['articles'], $type = 'edit');
         toastr('data has been updated', 'info', 'success');
-        return $product;
+        return redirect()->back();
     }
 }
