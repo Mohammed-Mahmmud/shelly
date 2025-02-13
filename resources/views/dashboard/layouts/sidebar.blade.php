@@ -86,6 +86,13 @@
                         <i class="bx bx-file"></i>
                         <span>Solutions</span> </a>
                 </li>
+
+                {{-- projects --}}
+                <li class="nav-item">
+                    <a href="{{ route('admin.projects.index') }}" class="nav-link menu-link @yield('projects-active')">
+                        <i class="bx bx-file"></i>
+                        <span>Projects</span> </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->

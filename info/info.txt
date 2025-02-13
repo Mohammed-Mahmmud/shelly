@@ -1,3 +1,0 @@
-admin account
-email : admin@mail.com
-password  : 123456789
