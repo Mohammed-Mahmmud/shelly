@@ -42,10 +42,16 @@ class ProductRequest extends FormRequest
             'snippet_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'features' =>  'required',
             'articles' =>  'required',
-            'types' =>  'nullable',
-            'categories' =>  'nullable',
-            'technologies' =>  'nullable',
-            'productUsings' =>  'nullable',
+            'types' => ['required', 'array'],
+            'categories' => ['required', 'array'],
+            'technologies' => ['required', 'array'],
+            'productUsings' => ['required', 'array'],
+            'types.*' => ['required', 'string'],
+            'categories.*' => ['required', 'string'],
+            'technologies.*' => ['required', 'string'],
+            'productUsings.*' => ['required', 'string'],
+
+
 
         ]);
     }
@@ -65,10 +71,15 @@ class ProductRequest extends FormRequest
             'snippet_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'features' =>  'required',
             'articles' =>  'required',
-            'types' =>  'nullable',
-            'categories' =>  'nullable',
-            'technologies' =>  'nullable',
-            'productUsings' =>  'nullable',
+            'types' => ['required', 'array'],
+            'categories' => ['required', 'array'],
+            'technologies' => ['required', 'array'],
+            'productUsings' => ['required', 'array'],
+            'types.*' => ['required', 'string'],
+            'categories.*' => ['required', 'string'],
+            'technologies.*' => ['required', 'string'],
+            'productUsings.*' => ['required', 'string'],
+
 
         ]);
     }

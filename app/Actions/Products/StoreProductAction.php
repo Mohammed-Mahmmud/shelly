@@ -11,6 +11,7 @@ class StoreProductAction
     use ImageHelper;
     public function handle(array $data)
     {
+
         $formattedData = [
             "title" => [
                 "en" => $data['title_en'],

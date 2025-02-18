@@ -25,7 +25,7 @@ class ProductResource extends JsonResource
         $data['long_desc'] = $this->getTranslation('long_desc', app()->getLocale());
         $data['features'] = FeaturesResource::collection($this->features);
         $data['articles'] = ArticlesResource::collection($this->articles);
-        $data['categories'] = CategoryResource::collection($this->categories);
+        $data['product_categories'] = CategoryResource::collection($this->categories);
         $data['product_types'] = ProductTypeResource::collection($this->types);
         $data['product_technologies'] = ProductTypeResource::collection($this->technologies);
         $data['product_using'] = ProductTypeResource::collection($this->productUsings);
