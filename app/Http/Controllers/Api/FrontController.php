@@ -72,19 +72,12 @@ class FrontController extends Controller
             if (is_string($types)) {
                 $types = explode(',', $types); // Convert string to array if needed
             }
-            $query->whereHas('types', function ($q) use ($types) {
-                $q->whereIn('types.id', $types); // Specify the table name
-            });
-        }
 
-        if ($request->has('filter_by_types')) {
-            $types = $request->get('filter_by_types');
-            if (is_string($types)) {
-                $types = explode(',', $types); // Convert string to array if needed
+            foreach ($types as $typeId) {
+                $query->whereHas('types', function ($q) use ($typeId) {
+                    $q->where('types.id', $typeId); // Ensure each type is present
+                });
             }
-            $query->whereHas('types', function ($q) use ($types) {
-                $q->whereIn('types.id', $types);
-            });
         }
 
         if ($request->has('filter_by_technologies')) {
@@ -92,9 +85,12 @@ class FrontController extends Controller
             if (is_string($technologies)) {
                 $technologies = explode(',', $technologies);
             }
-            $query->whereHas('technologies', function ($q) use ($technologies) {
-                $q->whereIn('technologies.id', $technologies);
-            });
+
+            foreach ($technologies as $techId) {
+                $query->whereHas('technologies', function ($q) use ($techId) {
+                    $q->where('technologies.id', $techId); // Ensure each technology is present
+                });
+            }
         }
 
         if ($request->has('filter_by_using')) {
@@ -102,9 +98,12 @@ class FrontController extends Controller
             if (is_string($using)) {
                 $using = explode(',', $using);
             }
-            $query->whereHas('productUsings', function ($q) use ($using) {
-                $q->whereIn('product_usings.id', $using);
-            });
+
+            foreach ($using as $usingId) {
+                $query->whereHas('productUsings', function ($q) use ($usingId) {
+                    $q->where('product_usings.id', $usingId); // Ensure each usage is present
+                });
+            }
         }
 
         if ($request->has('filter_by_categories')) {
@@ -112,10 +111,14 @@ class FrontController extends Controller
             if (is_string($categories)) {
                 $categories = explode(',', $categories);
             }
-            $query->whereHas('categories', function ($q) use ($categories) {
-                $q->whereIn('categories.id', $categories);
-            });
+
+            foreach ($categories as $categoryId) {
+                $query->whereHas('categories', function ($q) use ($categoryId) {
+                    $q->where('categories.id', $categoryId); // Ensure each category is present
+                });
+            }
         }
+
 
         // Paginate the results with 30 products per page
         $products = $query->paginate(30);

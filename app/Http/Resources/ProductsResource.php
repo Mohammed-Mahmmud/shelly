@@ -23,6 +23,10 @@ class ProductsResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $filteredImages = $this->media->filter(function ($media) {
+            return str_starts_with($media->collection_name, 'product-');
+        });
+
         return [
             'id' => $this->id,
             'title' => $this->getTranslation('title', app()->getLocale()),
@@ -38,7 +42,8 @@ class ProductsResource extends JsonResource
             'filter_by_using' => ProductUsing::get(['id', 'title']),
             'filter_by_categories' => Category::get(['id', 'title']),
             'sort_by' => ['title-ascending', 'title-descending', 'best-selling', 'price-ascending', 'price-descending', 'created-ascending', 'created-descending', 'manual'],
-
+            'snippet_image' => $this->getFirstMediaUrl('snippet_image'),
+            'images' => ImageResource::collectionToUrls($filteredImages),
 
         ];
     }
