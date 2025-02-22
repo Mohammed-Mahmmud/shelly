@@ -27,9 +27,10 @@
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th width="5%">#</th>
-                                                    <th width="20%">name</th>
-                                                    <th width="20%">slug</th>
-                                                    <th width="20%">status</th>
+                                                    <th width="15%">name</th>
+                                                    <th width="15%">slug</th>
+                                                    <th width="15%">Parent Page</th>
+                                                    <th width="15%">status</th>
                                                     <th width="20%">banner</th>
                                                     <th width="5%">action</th>
                                                 </tr>
@@ -37,10 +38,12 @@
                                             <tbody class="list form-check-all">
                                                 @if (count($data) > 0)
                                                     @foreach ($data as $key => $item)
-                                                        <tr>
-                                                            <td>{{ $loop->iteration }}</td>
+
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
                                                             <td>{{ $item->title }}</td>
                                                             <td>{{ $item->slug }}</td>
+                                                            <td>{{ $item->parents?->getTranslation('name','en') }}</td>
                                                             <td><span
                                                                     class="@if ($item->status == 'active') text-success @else text-danger @endif">
                                                                     {{ $item->status }}

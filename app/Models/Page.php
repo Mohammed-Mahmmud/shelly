@@ -25,4 +25,17 @@ class Page extends Model implements HasMedia
     {
         return $query->where('status', 'Active');
     }
+    public function parents()
+    {
+        return $this->belongsTo(Page::class, 'parent_id', 'id');
+    }
+
+    public function childes()
+    {
+        return $this->hasMany(Page::class, 'parent_id', 'id');
+    }
+    public function scopeParents($query)
+    {
+        return $query->whereNull('parent_id');
+    }
 }

@@ -22,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('products/{id?}', [FrontController::class, 'products']);
 Route::get('solutions/{category}', [FrontController::class, 'solutions']);
 Route::get('projects/{slug}', [FrontController::class, 'projects']);
+Route::get('pages/{slug?}', [FrontController::class, 'pages']);
+Route::get('producs-filter', [FrontController::class, 'productSFilter']);

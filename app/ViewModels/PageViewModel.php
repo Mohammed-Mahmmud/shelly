@@ -30,6 +30,6 @@ class PageViewModel extends ViewModel
     }
     public function pages()
     {
-        return Page::active()->get(['id', 'slug', 'name']);
+        return Page::active()->parents()->get(['id', 'slug', 'name']);
     }
 }

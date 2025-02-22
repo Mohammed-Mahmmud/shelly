@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PagesResources;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductsFilterResource;
 use App\Http\Resources\ProductsResource;
 use App\Http\Resources\ProjectResource;
+use App\Models\Page;
 use App\Models\Product;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -118,16 +121,15 @@ class FrontController extends Controller
                 });
             }
         }
-
-
         // Paginate the results with 30 products per page
         $products = $query->paginate(30);
-
-        return ProductsResource::collection($products);
+        return response()->json([
+            'success' => true,
+            'products' => ProductsResource::collection($products),
+            'filter' => ProductsFilterResource::make($products),
+        ]);
+        // return ProductsResource::collection($products);
     }
-
-
-
     public function solutions($category)
     {
         dd($category);
@@ -140,5 +142,13 @@ class FrontController extends Controller
         return ProjectResource::make(
             Project::where('slug', $slug)->active()->first()
         );
+    }
+    public function pages($slug = null)
+    {
+        $pages = Page::active()->parents()->with('childes')->get();
+        return response()->json([
+            'success' => true,
+            'navbar' => PagesResources::collection($pages),
+        ]);
     }
 }
