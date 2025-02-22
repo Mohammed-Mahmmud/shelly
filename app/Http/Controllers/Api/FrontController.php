@@ -12,7 +12,10 @@ use App\Models\Page;
 use App\Models\Product;
 use App\Models\Project;
 use Illuminate\Http\Request;
-
+use App\Models\Category;
+use App\Models\ProductUsing;
+use App\Models\Technology;
+use App\Models\Type;
 
 class FrontController extends Controller
 {
@@ -125,10 +128,43 @@ class FrontController extends Controller
         $products = $query->paginate(30);
         return response()->json([
             'success' => true,
-            'products' => ProductsResource::collection($products),
+            'products' => ProductsResource::collection($products)->response()->getData(true),
             'filter' => ProductsFilterResource::make($products),
         ]);
         // return ProductsResource::collection($products);
+    }
+    public function productsFilter()
+    {
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'filter_by_types' => Type::all()->map(function ($data) {
+                    return [
+                        'id' => $data->id,
+                        'title' => $data->getTranslation('title', app()->getLocale()),
+                    ];
+                }),
+                'filter_by_technologies' => Technology::all()->map(function ($data) {
+                    return [
+                        'id' => $data->id,
+                        'title' => $data->getTranslation('title', app()->getLocale()),
+                    ];
+                }),
+                'filter_by_using' => ProductUsing::all()->map(function ($data) {
+                    return [
+                        'id' => $data->id,
+                        'title' => $data->getTranslation('title', app()->getLocale()),
+                    ];
+                }),
+                'filter_by_categories' => Category::all()->map(function ($data) {
+                    return [
+                        'id' => $data->id,
+                        'title' => $data->getTranslation('title', app()->getLocale()),
+                    ];
+                }),
+                'sort_by' => ['title-ascending', 'title-descending', 'best-selling', 'price-ascending', 'price-descending', 'created-ascending', 'created-descending', 'manual'],
+            ],
+        ]);
     }
     public function solutions($category)
     {

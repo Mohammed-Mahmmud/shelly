@@ -18,6 +18,12 @@ class Type extends Model
         'title',
         'icon'
     ];
+    protected function casts(): array
+    {
+        return [
+            'title' => 'array', // Ensures Laravel properly converts JSON
+        ];
+    }
     public function products()
     {
         return $this->belongsToMany(Product::class);
