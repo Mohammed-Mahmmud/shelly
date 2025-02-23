@@ -44,7 +44,7 @@
                                                         <td>{{ $item->getTranslation('title', 'en') }}</td>
                                                         <td>{{ $item->getTranslation('title', 'ar') }}</td>
                                                         <td>
-                                                            <i class="{{ $item->icon }}"></i>
+                                                          <img src="{{ $item->getFirstMediaUrl('icon') }}" height="50px" width="50px">
                                                         </td>
                                                         <td>
                                                             <div class="d-flex gap-2">
@@ -85,10 +85,10 @@
                                                                     <div class="col-4">
                                                                         <label for="icon"
                                                                             class="form-label">icon</label>
-                                                                        <input type="text" id="icon" name="icon"
+                                                                        <input type="file" id="icon" accept="image/*" name="icon"
                                                                             class="form-control"
-                                                                            placeholder=" Enter admin icon"
-                                                                            value="{{ $item->icon }}" required="">
+                                                                            placeholder=" Enter product icon"
+                                                                            value="{{ $item->icon }}">
                                                                         <x-form.error :name="'icon'" />
                                                                     </div>
                                                                 </x-form.modal>
@@ -140,8 +140,8 @@
                     </div>
                     <div class="col-4">
                         <label for="icon" class="form-label">icon</label>
-                        <input type="text" id="icon" name="icon" class="form-control"
-                            placeholder=" Enter admin icon" required>
+                        <input type="file" id="icon" accept="image/*" name="icon" class="form-control"
+                            placeholder=" Enter product icon" required>
                         <x-form.error :name="'icon'" />
                     </div>
                 </x-form.modal>

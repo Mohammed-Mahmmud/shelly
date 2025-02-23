@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Helper\ImageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TypeRequest;
 use App\Models\Type;
@@ -9,6 +10,7 @@ use Exception;
 
 class ProductTypeController extends Controller
 {
+    use ImageHelper;
     /**
      * Display a listing of the resource.
      */
@@ -38,9 +40,11 @@ class ProductTypeController extends Controller
                     "en" => $data['title_en'],
                     "ar" => $data['title_ar']
                 ],
-                "icon" => $data['icon']
             ];
-            $this->model->create($type);
+            $productType = $this->model->create($type);
+            if (isset($data['icon'])) {
+                $this->StoreImage($data['icon'], $productType, 'icon');
+            }
             toastr('data has been saved', 'success', 'success');
             return redirect()->route($this->indexRoute);
         } catch (Exception $e) {
@@ -62,9 +66,11 @@ class ProductTypeController extends Controller
                     "en" => $data['title_en'],
                     "ar" => $data['title_ar']
                 ],
-                "icon" => $data['icon']
             ];
             $this->model->FindOrFail($id)->update($type);
+            if (isset($data['icon'])) {
+                $this->UpdateImage($data['icon'], $this->model->FindOrFail($id), 'icon');
+            }
             toastr('data has been updated', 'info', 'success');
             return redirect()->route($this->indexRoute);
         } catch (Exception $e) {

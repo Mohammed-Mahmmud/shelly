@@ -45,8 +45,8 @@
                                                         <td>{{ $item->getTranslation('title', 'en') }}</td>
                                                         <td>{{ $item->getTranslation('title', 'ar') }}</td>
                                                         <td>
-                                                            <i class="{{ $item->icon }}"></i>
-                                                        </td>
+                                                            <img src="{{ $item->getFirstMediaUrl('icon') }}" height="50px" width="50px">
+                                                          </td>
                                                         <td>
                                                             <div class="d-flex gap-2">
 
@@ -67,7 +67,7 @@
                                                                         <label for="name"
                                                                             class="form-label">product-using
                                                                             english name</label>
-                                                                        <input product-using="text" id="title_en"
+                                                                        <input type="text" id="title_en"
                                                                             name="title_en" class="form-control"
                                                                             placeholder="Enter english product-using Name"
                                                                             value="{{ $item->getTranslation('title', 'en') }}"
@@ -78,7 +78,7 @@
                                                                         <label for="name"
                                                                             class="form-label">product-using
                                                                             arabic name</label>
-                                                                        <input product-using="text" id="title_ar"
+                                                                        <input type="text" id="title_ar"
                                                                             name="title_ar" class="form-control"
                                                                             placeholder="Enter english product-using Name"
                                                                             value="{{ $item->getTranslation('title', 'ar') }}"
@@ -88,10 +88,10 @@
                                                                     <div class="col-4">
                                                                         <label for="icon"
                                                                             class="form-label">icon</label>
-                                                                        <input product-using="text" id="icon"
+                                                                        <input type="file" id="icon" accept="image/*"
                                                                             name="icon" class="form-control"
                                                                             placeholder=" Enter admin icon"
-                                                                            value="{{ $item->icon }}" required="">
+                                                                            value="{{ $item->icon }}">
                                                                         <x-form.error :name="'icon'" />
                                                                     </div>
                                                                 </x-form.modal>
@@ -131,19 +131,19 @@
                 <x-form.modal :id="'createNewproduct-using'" :title="'Add product-using'" :action="route('admin.product.using.store')" :method="'POST'">
                     <div class="col-4">
                         <label for="title_en" class="form-label">product-using english name</label>
-                        <input product-using="text" id="title_en" name="title_en" class="form-control"
+                        <input type="text" id="title_en" name="title_en" class="form-control"
                             placeholder="product-using english name" required>
                         <x-form.error :name="'title_en'" />
                     </div>
                     <div class="col-4">
                         <label for="title_en" class="form-label">product-using arabic name</label>
-                        <input product-using="text" id="title_ar" name="title_ar" class="form-control"
+                        <input type="text" id="title_ar" name="title_ar" class="form-control"
                             placeholder="product-using arabic name" required>
                         <x-form.error :name="'title_ar'" />
                     </div>
                     <div class="col-4">
                         <label for="icon" class="form-label">icon</label>
-                        <input product-using="text" id="icon" name="icon" class="form-control"
+                        <input type="file" id="icon" accept="image/*"  name="icon" class="form-control"
                             placeholder=" Enter admin icon" required>
                         <x-form.error :name="'icon'" />
                     </div>

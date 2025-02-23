@@ -40,8 +40,8 @@
                                                     :placehlder="'Please enter cover image'" :accept="'image/*'" />
                                             </div>
                                             <div class="col-6 mb-3">
-                                                <x-form.input :name="'icon'" :type="'text'" :label="'Enter icon'"
-                                                    :placehlder="'Please enter icon '" :value="$data->icon ?? ''" />
+                                                <x-form.input :name="'icon'" :type="'file'" :label="'Choose icon'"
+                                                    :placehlder="'Please Choose icon '" :value="$data->icon ?? ''" />
                                             </div>
                                         </div>
                                         <hr>

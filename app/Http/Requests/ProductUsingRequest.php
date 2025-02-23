@@ -32,7 +32,7 @@ class ProductUsingRequest extends FormRequest
         return Validator::make($request->all(), [
             'title_en' => 'required|string',
             'title_ar' => 'required|string',
-            'icon' => 'required|string',
+            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,webp,svg|max:20480',
         ]);
     }
     public function validationUpdate()
@@ -41,7 +41,7 @@ class ProductUsingRequest extends FormRequest
         return Validator::make($request->all(), [
             'title_en' => 'required|string',
             'title_ar' => 'required|string',
-            'icon' => 'required|string',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:20480',
         ]);
     }
 }

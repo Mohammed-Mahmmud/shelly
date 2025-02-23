@@ -20,11 +20,13 @@ class StoreCategoryAction
                 "en" => $data['desc_en'],
                 "ar" => $data['desc_ar']
             ],
-            "icon" => $data['icon']
         ];
         $category = Category::create($formattedData);
         if (isset($data['image'])) {
             $this->StoreImage($data['image'], $category, 'category');
+        }
+        if (isset($data['icon'])) {
+            $this->StoreImage($data['icon'], $category, 'icon');
         }
         toastr('data has been saved', 'success', 'success');
         return $category;

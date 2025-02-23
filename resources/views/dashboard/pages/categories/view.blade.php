@@ -45,7 +45,9 @@
                                                                     height="50px" width="100px"
                                                                     alt="category-image-{{ $item->id }}">
                                                             </td>
-                                                            <td><i class="{{ $item->icon }}"></i></td>
+                                                            <td>
+                                                                <img src="{{ $item->getFirstMediaUrl('icon') }}" height="50px" width="50px">
+                                                            </td>
                                                             <td>
                                                                 <div class="d-flex gap-2">
                                                                     <div class="edit">

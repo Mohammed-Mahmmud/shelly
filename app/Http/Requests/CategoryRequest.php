@@ -34,7 +34,7 @@ class CategoryRequest extends FormRequest
             'title_ar' => 'required|string',
             'desc_en' => 'required|string',
             'desc_ar' => 'required|string',
-            'icon' => 'required|string',
+            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,webp,svg|max:20480',
             'image' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:20480',
 
         ]);
@@ -47,7 +47,7 @@ class CategoryRequest extends FormRequest
             'title_ar' => 'required|string',
             'desc_en' => 'required|string',
             'desc_ar' => 'required|string',
-            'icon' => 'required|string',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:20480',
             'image' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:20480',
         ]);
     }

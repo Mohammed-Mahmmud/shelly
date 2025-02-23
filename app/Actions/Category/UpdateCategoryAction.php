@@ -19,7 +19,6 @@ class UpdateCategoryAction
                 "en" => $data['desc_en'],
                 "ar" => $data['desc_ar']
             ],
-            "icon" => $data['icon']
         ];
 
         $category->update($formattedData);
@@ -27,7 +26,9 @@ class UpdateCategoryAction
         if (isset($data['image'])) {
             $this->UpdateImage($data['image'], $category, 'category');
         }
-
+        if (isset($data['icon'])) {
+            $this->UpdateImage($data['icon'], $category, 'icon');
+        }
         toastr('data has been updated', 'info', 'success');
         return $category;
     }
