@@ -39,7 +39,9 @@ class UpdateProductAction
         if (isset($data['snippet_image'])) {
             $this->UpdateImage($data['snippet_image'], $product, 'snippet_image');
         }
-
+        if (isset($data['hoverImage'])) {
+            $this->UpdateImage($data['hoverImage'], $product, 'hoverImage');
+        }
         if (isset($data['types'])) {
             $product->types()->sync($data['types']);
         }

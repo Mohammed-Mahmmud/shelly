@@ -116,7 +116,7 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-6">
-                                                <x-form.dropdown :value="$data->categories->pluck('id')->toArray() ?? ''" :array="$categories" :label="'Choose categories:'"
+                                                <x-form.dropdown :multiple="false" :value="$data->categories->pluck('id')->toArray() ?? ''" :array="$categories" :label="'Choose categories:'"
                                                     :name="'categories'">
                                                 </x-form.dropdown>
                                             </div>

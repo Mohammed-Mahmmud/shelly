@@ -1,16 +1,18 @@
 <?php
 
-use App\Http\Controllers\Dashboard\ProductCategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\PageController;
+use App\Http\Controllers\Dashboard\ProductCategoryController;
 use App\Http\Controllers\Dashboard\ProductController;
-use App\Http\Controllers\Dashboard\ProductUsingController;
 use App\Http\Controllers\Dashboard\ProductTechnologyController;
 use App\Http\Controllers\Dashboard\ProductTypeController;
+use App\Http\Controllers\Dashboard\ProductUsingController;
 use App\Http\Controllers\Dashboard\ProjectController;
+use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\SolutionController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -52,6 +54,7 @@ Route::group(
             Route::resource('Pages', PageController::class)->names('pages');
             Route::resource('Solutions', SolutionController::class)->names('solutions');
             Route::resource('Projects', ProjectController::class)->names('projects');
+            Route::resource('settings', SettingsController::class)->names('settings');
         });
     }
 );

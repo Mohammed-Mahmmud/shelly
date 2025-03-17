@@ -26,9 +26,10 @@
                                         <table class="table align-middle mb-0 table_id">
                                             <thead class="table-dark">
                                                 <tr>
-                                                    <th width="10%">#</th>
-                                                    <th width="30%">name</th>
-                                                    <th width="30%">snippet image</th>
+                                                    <th width="5%">#</th>
+                                                    <th width="25%">name</th>
+                                                    <th width="25%">snippet image</th>
+                                                    <th width="25%">hover image</th>
                                                     <th width="20%">action</th>
                                                 </tr>
                                             </thead>
@@ -39,8 +40,20 @@
                                                             <td>{{ $loop->iteration }}</td>
                                                             <td>{{ $item->title }}</td>
                                                             <td>
+                                                                @if($item->getFirstMediaUrl('snippet_image'))
                                                                 <img src="{{ $item->getFirstMediaUrl('snippet_image') }}"
                                                                     height="50px" width="100px" alt="snippet image">
+                                                                    @else
+                                                                    no image found
+                                                                    @endif
+                                                            </td>
+                                                            <td>
+                                                                @if($item->getFirstMediaUrl('hoverImage'))
+                                                                <img src="{{ $item->getFirstMediaUrl('hoverImage') }}"
+                                                                    height="50px" width="100px" alt="hover image">
+                                                                    @else
+                                                                    no image found
+                                                                    @endif
                                                             </td>
                                                             <td>
                                                                 <div class="d-flex gap-2">

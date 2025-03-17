@@ -47,13 +47,17 @@
                                                     </div>
                                                 @endforeach
                                             @endif
-                                            <div class="col-6 mb-3">
+                                            <div class="col-4 mb-3">
                                                 <x-form.input :name="'images[]'" :type="'file'" :label="'Enter images'"
                                                     :placehlder="'Please enter images'" :accept="'image/*'" :value="$data->getMedia('images') ?? ''" multiple />
                                             </div>
-                                            <div class="col-6 mb-3">
+                                            <div class="col-4 mb-3">
                                                 <x-form.input :name="'snippet_image'" :type="'file'" :label="'Enter snippet image'"
                                                     :placehlder="'Please enter snippet image'" :accept="'image/*'" :value="$data->getMedia('snippet_image') ?? ''" />
+                                            </div>
+                                            <div class="col-4 mb-3">
+                                                <x-form.input :name="'hoverImage'" :type="'file'" :label="'Enter hover image'"
+                                                    :placehlder="'Please enter hover image'" :accept="'image/*'" :value="$data->getMedia('hoverImage') ?? ''" />
                                             </div>
                                             <div class="col-6 mb-3">
                                                 <x-form.input :name="'price'" :type="'number'" :label="'Enter price'"

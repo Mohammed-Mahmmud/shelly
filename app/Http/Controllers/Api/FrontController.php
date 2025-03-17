@@ -3,19 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\NavbarResources;
 use App\Http\Resources\PagesResources;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductsFilterResource;
 use App\Http\Resources\ProductsResource;
 use App\Http\Resources\ProjectResource;
+use App\Models\Category;
 use App\Models\Page;
 use App\Models\Product;
-use App\Models\Project;
-use Illuminate\Http\Request;
-use App\Models\Category;
 use App\Models\ProductUsing;
+use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
+use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
@@ -166,9 +167,9 @@ class FrontController extends Controller
             ],
         ]);
     }
-    public function solutions($category)
+    public function solutions($id)
     {
-        dd($category);
+        dd($id);
         return ProductResource::collection(
             Product::paginate(10)
         );
@@ -179,12 +180,19 @@ class FrontController extends Controller
             Project::where('slug', $slug)->active()->first()
         );
     }
-    public function pages($slug = null)
+    public function navbar()
     {
         $pages = Page::active()->parents()->with('childes')->get();
-        return response()->json([
-            'success' => true,
-            'navbar' => PagesResources::collection($pages),
-        ]);
+        return NavbarResources::collection($pages);
+    }
+    public function pages($id = null)
+    {
+        if (isset($id)) {
+            $page = Page::findOrFail($id);
+            return PagesResources::make($page);
+        } else {
+            $pages = Page::active()->parents()->with('childes')->get();
+            return PagesResources::collection($pages);
+        }
     }
 }

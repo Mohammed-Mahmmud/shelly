@@ -12,15 +12,9 @@ class PagesResources extends JsonResource
      *
      * @return array<string, mixed>
      */
+
     public function toArray(Request $request): array
     {
-        // return parent::toArray($request);
-
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'slug' => $this->slug,
-            'children' => PagesResources::collection($this->whenLoaded('childes')), // Recursive loading
-        ];
+        return parent::toArray($request);
     }
 }

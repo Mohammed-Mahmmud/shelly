@@ -38,6 +38,9 @@ class StoreProductAction
         if (isset($data['snippet_image'])) {
             $this->StoreImage($data['snippet_image'], $product, 'snippet_image');
         }
+        if (isset($data['hoverImage'])) {
+            $this->StoreImage($data['hoverImage'], $product, 'hoverImage');
+        }
         $product->types()->attach($data['types']);
         $product->categories()->attach($data['categories']);
         $product->technologies()->attach($data['technologies']);

@@ -3,6 +3,7 @@
 namespace App\ViewModels;
 
 use App\Models\Category;
+use App\Models\Page;
 use App\Models\Solution;
 use App\Models\TranslationKey;
 use App\Models\Type;
@@ -36,6 +37,7 @@ class SolutionViewModel extends ViewModel
     }
     public function categories()
     {
-        return Category::get();
+        // return Category::get();
+        return Page::active()->childes()->where('parent_id', 1)->get();
     }
 }

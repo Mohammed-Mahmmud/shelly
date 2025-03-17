@@ -31,6 +31,7 @@ class ProductResource extends JsonResource
         $data['product_using'] = ProductTypeResource::collection($this->productUsings);
 
         $data['snippet_image'] = $this->getFirstMediaUrl('snippet_image');
+        $data['hover_image'] = $this->getFirstMediaUrl('hoverImage');
         $filteredImages = $this->media->filter(function ($media) {
             return str_starts_with($media->collection_name, 'product-');
         });

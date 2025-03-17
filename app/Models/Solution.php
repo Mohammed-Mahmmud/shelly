@@ -20,11 +20,18 @@ class Solution extends Model implements HasMedia
     public $translatable = [
         'title',
         'desc',
+        'name'
     ];
     public function types()
     {
         return $this->belongsToMany(Type::class, 'solution_type', 'solution_id', 'type_id');
     }
+    // public function categories()
+    // {
+    //     $pages = Page::active()->childes()->where('parent_id', 1)->get();
+    //     // dd($pages);
+    //     return $pages;
+    // }
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'solution_category', 'solution_id', 'category_id');

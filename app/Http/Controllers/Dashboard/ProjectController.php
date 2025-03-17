@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Actions\Projects\StoreProjectAction;
-use App\Actions\Projects\UpdateProjectAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
-use App\Models\Project;
+use App\Services\ProjectService;
 use App\ViewModels\ProjectViewModel;
 use Exception;
 
@@ -15,17 +13,18 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public $model, $view, $indexRoute;
-    public function __construct()
+    public $view, $indexRoute;
+    protected $projectService;
+    public function __construct(ProjectService $projectService)
     {
-        $this->model = new Project();
+        $this->projectService = $projectService;
         $this->view = 'projects';
         $this->indexRoute = 'admin.projects.index';
     }
     public function index()
     {
         try {
-            $data = $this->model::orderBy('id', 'desc')->get();
+            $data = $this->projectService->getAll();
             return view("dashboard.pages.$this->view.view", compact('data'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -50,7 +49,8 @@ class ProjectController extends Controller
     public function store(ProjectRequest $request)
     {
         try {
-            app(StoreProjectAction::class)->handle($request->validationStore()->validated());
+            $this->projectService->store($request->validationStore()->validated());
+            toastr('data has been saved', 'success', 'success');
             return redirect()->route($this->indexRoute);
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -71,8 +71,7 @@ class ProjectController extends Controller
     public function edit(string $id)
     {
         try {
-            $data = $this->model::findOrFail($id);
-            return view("dashboard.pages.$this->view.crud", new ProjectViewModel($data));
+            return view("dashboard.pages.$this->view.crud", new ProjectViewModel($this->projectService->find($id)));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -84,8 +83,8 @@ class ProjectController extends Controller
     public function update(ProjectRequest $request, string $id)
     {
         try {
-            $product = $this->model::findOrFail($id);
-            app(UpdateProjectAction::class)->handle($product, $request->validationUpdate()->validated());
+            $this->projectService->update($id, $request->validationUpdate()->validated());
+            toastr('data has been updated', 'info', 'success');
             return redirect()->route($this->indexRoute);
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -98,7 +97,7 @@ class ProjectController extends Controller
     public function destroy(string $id)
     {
         try {
-            $this->model::findOrFail($id)->delete();
+            $this->projectService->delete($id);
             return redirect()->route($this->indexRoute);
             toastr(trans('data has been removed'), 'error', trans('Deleted'));
         } catch (Exception $e) {

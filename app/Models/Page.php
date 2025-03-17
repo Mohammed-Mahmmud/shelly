@@ -38,4 +38,8 @@ class Page extends Model implements HasMedia
     {
         return $query->whereNull('parent_id');
     }
+    public function scopeChildes($query)
+    {
+        return $query->whereNotNull('parent_id');
+    }
 }

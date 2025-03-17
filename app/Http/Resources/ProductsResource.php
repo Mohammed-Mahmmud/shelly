@@ -32,6 +32,7 @@ class ProductsResource extends JsonResource
             'product_technologies' => ProductTypeResource::collection($this->technologies),
             'product_using' => ProductTypeResource::collection($this->productUsings),
             'snippet_image' => $this->getFirstMediaUrl('snippet_image'),
+            'hover_image' => $this->getFirstMediaUrl('hoverImage'),
             'images' => ImageResource::collectionToUrls($filteredImages),
 
         ];

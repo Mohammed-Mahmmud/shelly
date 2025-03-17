@@ -50,6 +50,7 @@ class ProductRequest extends FormRequest
             'categories.*' => ['required', 'string'],
             'technologies.*' => ['required', 'string'],
             'productUsings.*' => ['required', 'string'],
+            'hoverImage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
 
 
@@ -79,6 +80,7 @@ class ProductRequest extends FormRequest
             'categories.*' => ['required', 'string'],
             'technologies.*' => ['required', 'string'],
             'productUsings.*' => ['required', 'string'],
+            'hoverImage' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
 
         ]);
