@@ -32,6 +32,8 @@ class TypeRequest extends FormRequest
         return Validator::make($request->all(), [
             'title_en' => 'required|string',
             'title_ar' => 'required|string',
+            'desc_en' => 'required|string',
+            'desc_ar' => 'required|string',
             'icon' => 'required|image|mimes:jpeg,png,jpg,gif,webp,svg|max:20480',
         ]);
     }
@@ -41,6 +43,8 @@ class TypeRequest extends FormRequest
         return Validator::make($request->all(), [
             'title_en' => 'required|string',
             'title_ar' => 'required|string',
+            'desc_en' => 'required|string',
+            'desc_ar' => 'required|string',
             'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:20480',
         ]);
     }

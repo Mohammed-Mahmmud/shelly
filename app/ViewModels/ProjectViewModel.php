@@ -2,10 +2,11 @@
 
 namespace App\ViewModels;
 
-use App\Models\Category;
-use App\Models\Project;
-use App\Models\TranslationKey;
+use App\Models\Page;
 use App\Models\Type;
+use App\Models\Project;
+use App\Models\Category;
+use App\Models\TranslationKey;
 use Spatie\ViewModels\ViewModel;
 
 class ProjectViewModel extends ViewModel
@@ -33,5 +34,10 @@ class ProjectViewModel extends ViewModel
     public function types()
     {
         return Type::get();
+    }
+    public function pages()
+    {
+        $parent = Page::where('slug', 'projects')->first();
+        return Page::active()->where('parent_id', $parent->id)->get();
     }
 }

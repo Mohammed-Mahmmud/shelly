@@ -5,7 +5,7 @@ namespace App\Actions\Pages;
 use App\Helper\ImageHelper;
 use App\Models\Page;
 
-class UpdatePageAction
+class       UpdatePageAction
 {
     use ImageHelper;
     public function handle(Page $page, array $data)
@@ -35,7 +35,9 @@ class UpdatePageAction
                 $this->UpdateImage($image, $page, 'banner-' . $key);
             }
         }
-
+        if (isset($data['icon'])) {
+            $this->UpdateImage($data['icon'], $page, 'icon');
+        }
         toastr('data has been updated', 'info', 'success');
         return $page;
     }

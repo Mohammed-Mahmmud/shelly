@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Category;
+use App\Models\Page;
 use App\Models\Type;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,15 +26,10 @@ class Solution extends Model implements HasMedia
     {
         return $this->belongsToMany(Type::class, 'solution_type', 'solution_id', 'type_id');
     }
-    // public function categories()
-    // {
-    //     $pages = Page::active()->childes()->where('parent_id', 1)->get();
-    //     // dd($pages);
-    //     return $pages;
-    // }
-    public function categories()
+
+    public function pages()
     {
-        return $this->belongsToMany(Category::class, 'solution_category', 'solution_id', 'category_id');
+        return $this->belongsToMany(Page::class, 'solution_page', 'solution_id', 'page_id');
     }
     public function scopeActive($query)
     {

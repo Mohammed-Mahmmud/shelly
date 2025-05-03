@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
-
+use  App\Models\Solution;
 class Page extends Model implements HasMedia
 {
     use HasFactory, HasTranslations, InteractsWithMedia;
@@ -29,7 +29,10 @@ class Page extends Model implements HasMedia
     {
         return $this->belongsTo(Page::class, 'parent_id', 'id');
     }
-
+    public function solutions()
+    {
+        return $this->belongsToMany(Solution::class, 'solution_page', 'page_id', 'solution_id');
+    }
     public function childes()
     {
         return $this->hasMany(Page::class, 'parent_id', 'id');

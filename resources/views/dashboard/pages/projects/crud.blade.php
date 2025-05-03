@@ -35,12 +35,25 @@
                                                 @endforeach
                                             @endif
 
-                                            <div class="col-6 mb-3">
+                                            <div class="col-4 mb-3">
                                                 <x-form.select :value="$data->status ?? ''" :array="App\Models\Project::STATUS" :label="'choose project Status:'"
                                                     :name="'status'">
                                                 </x-form.select>
                                             </div>
-                                            <div class="col-6 mb-3">
+                                            <div class="col-4 mb-3">
+                                                <label for="pages"
+                                                    class="form-label">{{ ucfirst('Choose categories') }}</label>
+                                                <select name="page_id" id="pages-id" class="form-control">
+                                                    <option disabled> Choose An Option</option>
+                                                    @foreach ($pages as $item)
+                                                        <option value="{{ $item->id }}"
+                                                            @if ($item->id == $data->page_id) selected @endif>
+                                                            {{ ucwords($item->name) }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <x-form.error :name="'page_id'" />
+                                            </div>
+                                            <div class="col-4 mb-3">
                                                 <x-form.input :name="'slug'" :type="'text'" :label="'Enter slug'"
                                                     :placehlder="'Please enter slug'" :value="$data->slug ?? ''" />
                                             </div>

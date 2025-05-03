@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\NavbarResources;
-use App\Http\Resources\PagesResources;
-use App\Http\Resources\ProductResource;
-use App\Http\Resources\ProductsFilterResource;
-use App\Http\Resources\ProductsResource;
-use App\Http\Resources\ProjectResource;
-use App\Models\Category;
 use App\Models\Page;
-use App\Models\Product;
-use App\Models\ProductUsing;
-use App\Models\Project;
-use App\Models\Technology;
 use App\Models\Type;
+use App\Models\Product;
+use App\Models\Project;
+use App\Models\Category;
+use App\Models\Solution;
+use App\Models\Technology;
+use App\Models\ProductUsing;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\PagesResources;
+use App\Http\Resources\NavbarResources;
+use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProjectResource;
+use App\Http\Resources\ProductsResource;
+use App\Http\Resources\ProjectsResource;
+use App\Http\Resources\SolutionResource;
+use App\Http\Resources\ProjectsResources;
+use App\Http\Resources\ProductsFilterResource;
 
 class FrontController extends Controller
 {
@@ -167,23 +171,28 @@ class FrontController extends Controller
             ],
         ]);
     }
-    public function solutions($id)
+    public function solutions(Page $page)
     {
-        dd($id);
-        return ProductResource::collection(
-            Product::paginate(10)
-        );
+        return SolutionResource::collection($page->solutions);
     }
-    public function projects($slug)
+    public function projects($id)
+    {
+        $projects = Project::where('page_id', $id)->active()->paginate(30);
+        return response()->json([
+            'success' => true,
+            'projects' => ProjectsResources::collection($projects)->response()->getData(true),
+        ]);
+    }
+    public function project($id)
     {
         return ProjectResource::make(
-            Project::where('slug', $slug)->active()->first()
+            Project::where('id', $id)->active()->first()
         );
     }
     public function navbar()
     {
         $pages = Page::active()->parents()->with('childes')->get();
-        return NavbarResources::collection($pages);
+        return NavbarResources::make($pages);
     }
     public function pages($id = null)
     {

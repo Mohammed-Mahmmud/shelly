@@ -40,11 +40,15 @@
                                                     </div>
                                                 @endforeach
                                             @endif
-                                            <div class="col-6 mb-3">
+                                            <div class="col-4 mb-3">
                                                 <x-form.input :name="'images[]'" :type="'file'" :label="'Enter images'"
                                                     :placehlder="'Please enter images'" :accept="'image/*'" :value="$data->getMedia('images') ?? ''" multiple />
                                             </div>
-                                            <div class="col-6 mb-3">
+                                                <div class="col-4 mb-3">
+                                                    <x-form.input :name="'icon'" :type="'file'" :label="'Enter page icon'"
+                                                                  :placehlder="'Please enter icon'" :accept="'image/*'" :value="$data->getMedia('icon') ?? ''"  />
+                                                </div>
+                                            <div class="col-4 mb-3">
                                                 <x-form.select :value="$data->status ?? ''" :array="App\Models\Page::STATUS" :label="'choose Page Status:'"
                                                     :name="'status'">
                                                 </x-form.select>

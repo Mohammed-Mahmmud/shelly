@@ -10,7 +10,7 @@ class StoreSolutionAction
     use ImageHelper;
     public function handle(array $data)
     {
-        dd($data);
+//        dd($data);
         foreach ($data['content'] as $content) {
             $formattedcontent = [
                 "title" => [
@@ -30,8 +30,8 @@ class StoreSolutionAction
                 }
             }
             $solution->types()->attach($content['types']);
+            $solution->pages()->attach($data['pages']);
         }
-        // $solution->categories()->attach($data['categories']);
         toastr('data has been saved', 'success', 'success');
         return redirect()->back();
     }

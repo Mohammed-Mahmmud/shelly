@@ -20,8 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::group(['as' => 'api.'], function () {
     Route::get('products/{id?}', [FrontController::class, 'products'])->name('products');
-    Route::get('solutions/{id?}', [FrontController::class, 'solutions']);
-    Route::get('projects/{slug}', [FrontController::class, 'projects']);
+    Route::get('solutions/{page}', [FrontController::class, 'solutions'])->name('solutions');
+    Route::get('projects/{id}/', [FrontController::class, 'projects'])->name('projects');
+    Route::get('project/{id}/', [FrontController::class, 'project'])->name('project');
     Route::get('navbar/{slug?}', [FrontController::class, 'navbar']);
     // Route::get('pages/{id?}', [FrontController::class, 'pages'])->name('pages');
     Route::get('producs-filter', [FrontController::class, 'productsFilter']);

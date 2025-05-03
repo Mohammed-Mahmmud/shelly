@@ -35,9 +35,9 @@ class SolutionViewModel extends ViewModel
     {
         return Type::get();
     }
-    public function categories()
+    public function pages()
     {
-        // return Category::get();
-        return Page::active()->childes()->where('parent_id', 1)->get();
+        $parent = Page::where('slug', 'solutions')->first();
+        return Page::active()->parents()->where('parent_id', $parent->id)->get();
     }
 }

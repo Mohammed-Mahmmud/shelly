@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('solution_category', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('solution_id')->constrained()->onDelete('cascade');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
+        Schema::table('projects', function (Blueprint $table) {
+            $table->foreignId('page_id')->nullable()->constrained('pages')->cascadeOnDelete();
         });
     }
+    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('solution_category');
+        Schema::table('projects', function (Blueprint $table) {
+            //
+        });
     }
 };

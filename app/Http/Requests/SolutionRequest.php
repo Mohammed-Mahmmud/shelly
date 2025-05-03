@@ -34,7 +34,7 @@ class SolutionRequest extends FormRequest
             'content' =>  'required',
             'slug' =>  'required',
             'types' =>  'required',
-            'categories' =>  'required',
+            'pages' =>  'required',
         ]);
     }
     public function validationUpdate()
@@ -48,7 +48,7 @@ class SolutionRequest extends FormRequest
             'desc_ar' =>  'required|string',
             'slug' =>  'required',
             'types' =>  'required',
-            'categories' =>  'required',
+            'pages' =>  'required',
         ]);
     }
 }

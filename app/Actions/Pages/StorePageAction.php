@@ -34,6 +34,9 @@ class StorePageAction
                 $this->StoreImage($image, $page, 'banner-' . $key);
             }
         }
+        if (isset($data['icon'])) {
+                $this->StoreImage($data['icon'], $page, 'icon');
+        }
         toastr('data has been saved', 'success', 'success');
         return $page;
     }

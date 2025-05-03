@@ -18,11 +18,13 @@ class Type extends Model implements HasMedia
     public $timestamps = true;
     public $translatable = [
         'title',
+        'desc',
     ];
     protected function casts(): array
     {
         return [
             'title' => 'array', // Ensures Laravel properly converts JSON
+            'desc' => 'array', // Ensures Laravel properly converts JSON
         ];
     }
     public function products()

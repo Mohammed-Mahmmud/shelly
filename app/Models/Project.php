@@ -22,4 +22,8 @@ class Project extends Model
     {
         return $query->where('status', 'Active');
     }
+    public function pages()
+    {
+        return $this->belongsTo(Page::class, 'page_id', 'id');
+    }
 }

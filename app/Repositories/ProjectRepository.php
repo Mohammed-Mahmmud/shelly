@@ -29,6 +29,7 @@ class ProjectRepository
             ],
             'status' => $data['status'],
             'slug' => $data['slug'],
+            'page_id' => $data['page_id'],
         ];
         return Project::create($formatteddata);
     }
@@ -45,6 +46,7 @@ class ProjectRepository
             ],
             'status' => $data['status'],
             'slug' => $data['slug'],
+            'page_id' => $data['page_id'],
         ];
 
         $project->update($formatteddata);

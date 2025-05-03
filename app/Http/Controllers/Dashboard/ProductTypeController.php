@@ -40,6 +40,10 @@ class ProductTypeController extends Controller
                     "en" => $data['title_en'],
                     "ar" => $data['title_ar']
                 ],
+                "desc" => [
+                    "en" => $data['desc_en'],
+                    "ar" => $data['desc_ar']
+                ],
             ];
             $productType = $this->model->create($type);
             if (isset($data['icon'])) {
@@ -65,6 +69,10 @@ class ProductTypeController extends Controller
                 "title" => [
                     "en" => $data['title_en'],
                     "ar" => $data['title_ar']
+                ],
+                "desc" => [
+                    "en" => $data['desc_en'],
+                    "ar" => $data['desc_ar']
                 ],
             ];
             $this->model->FindOrFail($id)->update($type);

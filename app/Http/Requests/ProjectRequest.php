@@ -36,6 +36,7 @@ class ProjectRequest extends FormRequest
             'desc_ar' => 'required|string',
             'status' => 'required',
             'slug' => 'required',
+            'page_id' => 'required',
         ]);
     }
     public function validationUpdate()
@@ -48,6 +49,7 @@ class ProjectRequest extends FormRequest
             'desc_ar' => 'required|string',
             'status' => 'required',
             'slug' => 'required',
+            'page_id' => 'required',
         ]);
     }
 }

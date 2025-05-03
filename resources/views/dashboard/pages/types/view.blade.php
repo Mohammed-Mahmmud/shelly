@@ -44,7 +44,8 @@
                                                         <td>{{ $item->getTranslation('title', 'en') }}</td>
                                                         <td>{{ $item->getTranslation('title', 'ar') }}</td>
                                                         <td>
-                                                          <img src="{{ $item->getFirstMediaUrl('icon') }}" height="50px" width="50px">
+                                                            <img src="{{ $item->getFirstMediaUrl('icon') }}" height="50px"
+                                                                width="50px">
                                                         </td>
                                                         <td>
                                                             <div class="d-flex gap-2">
@@ -85,11 +86,26 @@
                                                                     <div class="col-4">
                                                                         <label for="icon"
                                                                             class="form-label">icon</label>
-                                                                        <input type="file" id="icon" accept="image/*" name="icon"
+                                                                        <input type="file" id="icon"
+                                                                            accept="image/*" name="icon"
                                                                             class="form-control"
                                                                             placeholder=" Enter product icon"
                                                                             value="{{ $item->icon }}">
                                                                         <x-form.error :name="'icon'" />
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <label for="desc_ar" class="form-label">description
+                                                                            arabic name</label>
+                                                                        <textarea id="desc_ar" name="desc_ar" class="form-control" placeholder="Enter arabic type description">{{ $item->getTranslation('desc', 'ar') }}</textarea>
+                                                                        <x-form.error :name="'desc_ar'" />
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <label for="desc_en" class="form-label">type
+                                                                            english name</label>
+                                                                        <textarea id="desc_en" name="desc_en" class="form-control" placeholder="Enter english type description">
+                                                                            {{ $item->getTranslation('desc', 'en') }}
+                                                                        </textarea>
+                                                                        <x-form.error :name="'desc_en'" />
                                                                     </div>
                                                                 </x-form.modal>
 
@@ -143,6 +159,19 @@
                         <input type="file" id="icon" accept="image/*" name="icon" class="form-control"
                             placeholder=" Enter product icon" required>
                         <x-form.error :name="'icon'" />
+                    </div>
+                    <div class="col-6">
+                        <label for="desc_ar" class="form-label">description arabic name</label>
+                        <textarea id="desc_ar" name="desc_ar" class="form-control" placeholder="Enter arabic type description">{{ $item->getTranslation('desc', 'ar') }}</textarea>
+                        <x-form.error :name="'desc_ar'" />
+                    </div>
+                    <div class="col-6">
+                        <label for="desc_en" class="form-label">type
+                            english name</label>
+                        <textarea id="desc_en" name="desc_en" class="form-control" placeholder="Enter english type description">
+                                                                            {{ $item->getTranslation('desc', 'en') }}
+                                                                        </textarea>
+                        <x-form.error :name="'desc_en'" />
                     </div>
                 </x-form.modal>
             </div>

@@ -11,8 +11,6 @@ class UpdateSolutionAction
 
     public function handle(Solution $solution, array $data)
     {
-        // dd($data);
-
         $formattedData = [
             "title" => [
                 "en" => $data['title_en'],
@@ -31,8 +29,7 @@ class UpdateSolutionAction
             }
         }
         $solution->types()->sync($data['types']);
-
-        $solution->categories()->sync($data['categories']);
+        $solution->pages()->sync($data['pages']);
 
         toastr('data has been updated', 'info', 'success');
         return redirect()->back();

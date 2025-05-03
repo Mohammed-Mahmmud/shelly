@@ -29,6 +29,7 @@
                                                     <th width="5%">#</th>
                                                     <th width="20%">name</th>
                                                     <th width="20%">status</th>
+                                                    <th width="20%">Category</th>
                                                     <th width="5%">action</th>
                                                 </tr>
                                             </thead>
@@ -42,6 +43,7 @@
                                                                     class="@if ($item->status == 'active') text-success @else text-danger @endif">
                                                                     {{ $item->status }}
                                                                 </span></td>
+                                                                <td>{{$item->pages->name}}</td>
                                                             <td>
                                                                 <div class="d-flex gap-2">
                                                                     <div class="edit">

@@ -39,6 +39,7 @@ class PageRequest extends FormRequest
             'slug' => 'required|string',
             'status' => 'required|string',
             'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:40960',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10960',
             'parent_id' => 'nullable|numeric'
 
 
@@ -57,6 +58,7 @@ class PageRequest extends FormRequest
             'slug' => 'required|string',
             'status' => 'required|string',
             'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:40960',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10960',
             'parent_id' => 'nullable|numeric'
         ]);
     }
