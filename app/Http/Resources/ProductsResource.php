@@ -20,7 +20,7 @@ class ProductsResource extends JsonResource
         $filteredImages = $this->media->filter(function ($media) {
             return str_starts_with($media->collection_name, 'product-');
         });
-
+        // dd($this->technologies);
         return [
             'id' => $this->id,
             'title' => $this->getTranslation('title', app()->getLocale()),

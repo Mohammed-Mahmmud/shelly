@@ -29,6 +29,7 @@
                                                     <th width="10%">#</th>
                                                     <th width="30%">name</th>
                                                     <th width="30%">snippet image</th>
+                                                    <th width="20%">category</th>
                                                     <th width="20%">action</th>
                                                 </tr>
                                             </thead>
@@ -42,6 +43,12 @@
                                                                 {{-- @dump($item->getFirstMediaUrl($item->title . '-0')) --}}
                                                                 <x-form.preview-image :image="$item->getFirstMediaUrl($item->title . '-0')" :height="'50px'"
                                                                     :width="'100px'" :alt="$item->title" />
+                                                            </td>
+                                                            <td>
+                                                                @foreach ($item->pages as $sol)
+                                                                        {{ $sol->getTranslation('name', app()->getLocale()) }}
+                                                                    <br>
+                                                                @endforeach
                                                             </td>
                                                             <td>
                                                                 <div class="d-flex gap-2">

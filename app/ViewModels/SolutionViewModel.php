@@ -38,6 +38,6 @@ class SolutionViewModel extends ViewModel
     public function pages()
     {
         $parent = Page::where('slug', 'solutions')->first();
-        return Page::active()->parents()->where('parent_id', $parent->id)->get();
+        return Page::active()->where('parent_id', $parent->id)->get();
     }
 }

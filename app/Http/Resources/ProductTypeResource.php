@@ -14,10 +14,10 @@ class ProductTypeResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // dd($this->types  );
+        // dd($this);
         return [
             'title' => $this->getTranslation('title', app()->getLocale()),
-            'desc' => $this->getTranslation('desc', app()->getLocale()),
+            'desc' => $this->desc ? $this->getTranslation('desc', app()->getLocale()) : '',
             'icon' => $this->getFirstMediaUrl('icon'),
         ];
     }

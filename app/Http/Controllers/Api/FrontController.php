@@ -12,6 +12,7 @@ use App\Models\Technology;
 use App\Models\ProductUsing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\HomeResource;
 use App\Http\Resources\PagesResources;
 use App\Http\Resources\NavbarResources;
 use App\Http\Resources\ProductResource;
@@ -175,9 +176,13 @@ class FrontController extends Controller
     {
         return SolutionResource::collection($page->solutions);
     }
-    public function projects($id)
+    public function projects($id = null)
     {
+        if (isset($id)) {
         $projects = Project::where('page_id', $id)->active()->paginate(30);
+        } else {
+            $projects = Project::active()->get();
+        }
         return response()->json([
             'success' => true,
             'projects' => ProjectsResources::collection($projects)->response()->getData(true),
@@ -194,14 +199,27 @@ class FrontController extends Controller
         $pages = Page::active()->parents()->with('childes')->get();
         return NavbarResources::make($pages);
     }
-    public function pages($id = null)
+    public function home($slug = null)
     {
-        if (isset($id)) {
-            $page = Page::findOrFail($id);
+        if ($slug) {
+            $page = Page::active()->where('slug', $slug)->first();
             return PagesResources::make($page);
-        } else {
-            $pages = Page::active()->parents()->with('childes')->get();
-            return PagesResources::collection($pages);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Page not found',
+        ], 404);
+    }
+    public function getHomePage()
+    {
+        try {
+            $page = Page::active()->where('slug', 'home')->first();
+            return HomeResource::make($page);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Page not found',
+            ], 404);
         }
     }
 }

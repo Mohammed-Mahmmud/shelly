@@ -18,12 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::group(['as' => 'api.'], function () {
-    Route::get('products/{id?}', [FrontController::class, 'products'])->name('products');
-    Route::get('solutions/{page}', [FrontController::class, 'solutions'])->name('solutions');
-    Route::get('projects/{id}/', [FrontController::class, 'projects'])->name('projects');
-    Route::get('project/{id}/', [FrontController::class, 'project'])->name('project');
-    Route::get('navbar/{slug?}', [FrontController::class, 'navbar']);
-    // Route::get('pages/{id?}', [FrontController::class, 'pages'])->name('pages');
-    Route::get('producs-filter', [FrontController::class, 'productsFilter']);
+Route::controller(FrontController::class)->name('api.')->group(function () {
+    Route::get('products/{id?}', 'products')->name('products');
+    Route::get('solutions/{page}', 'solutions')->name('solutions');
+    Route::get('projects/{id?}', 'projects')->name('projects');
+    Route::get('project/{id}/', 'project')->name('project');
+    Route::get('navbar/{slug?}', 'navbar');
+    Route::get('producs-filter', 'productsFilter')->name('productsFilter');
+    Route::get('page/home', 'getHomePage')->name('home');
 });
