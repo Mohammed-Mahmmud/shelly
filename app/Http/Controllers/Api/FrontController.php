@@ -22,6 +22,8 @@ use App\Http\Resources\ProjectsResource;
 use App\Http\Resources\SolutionResource;
 use App\Http\Resources\ProjectsResources;
 use App\Http\Resources\ProductsFilterResource;
+use App\Models\Setting;
+use Illuminate\Http\JsonResponse;
 
 class FrontController extends Controller
 {
@@ -221,5 +223,14 @@ class FrontController extends Controller
                 'message' => 'Page not found',
             ], 404);
         }
+    }
+    public function settings(): JsonResponse
+    {
+        $settings = Setting::select('name', 'value')->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $settings,
+        ]);
     }
 }

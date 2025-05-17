@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\FrontController;
+use App\Http\Controllers\Api\SettingsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,5 @@ Route::controller(FrontController::class)->name('api.')->group(function () {
     Route::get('navbar/{slug?}', 'navbar');
     Route::get('producs-filter', 'productsFilter')->name('productsFilter');
     Route::get('page/home', 'getHomePage')->name('home');
+    Route::get('settings', 'settings')->name('settings');
 });

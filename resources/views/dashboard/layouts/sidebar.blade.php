@@ -94,11 +94,11 @@
                         <span>Projects</span> </a>
                 </li>
                 {{-- settings --}}
-                {{-- <li class="nav-item">
+                <li class="nav-item">
                     <a href="{{ route('admin.settings.index') }}" class="nav-link menu-link @yield('settings-active')">
                         <i class="bx bx-file"></i>
                         <span>settings</span> </a>
-                </li> --}}
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->
