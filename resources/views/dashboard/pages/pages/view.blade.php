@@ -38,52 +38,53 @@
                                             <tbody class="list form-check-all">
                                                 @if (count($data) > 0)
                                                     @foreach ($data as $key => $item)
+                                                                                        <tr>
+                                                                                            <td>{{ $loop->iteration }}</td>
+                                                                                            <td>{{ $item->title }}</td>
+                                                                                            <td>{{ $item->slug }}</td>
+                                                                                            <td>{{ $item->parents->name ?? '' }}</td>
+                                                                                            <td>{{ $item->status }}</td>
 
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                            <td>{{ $item->title }}</td>
-                                                            <td>{{ $item->slug }}</td>
-                                                            <td>
-                                                                @if ($item->getFirstMediaUrl('banner-0'))
-                                                                    @if (Str::endsWith($item->getFirstMediaUrl('banner-0'), '.mp4'))
-                                                                        <video width="80" height="80" controls>
-                                                                            <source
-                                                                                src="{{ $item->getFirstMediaUrl('banner-0') }}"
-                                                                                type="video/mp4">
-                                                                        </video>
-                                                                    @else
-                                                                        <img src="{{ $item->getFirstMediaUrl('banner-0') }}"
-                                                                            height="80px" width="80px" alt="banner image">
-                                                                    @endif
-                                                                @endif
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex gap-2">
-                                                                    <div class="edit">
-                                                                        <a class="btn btn-sm btn-info edit-item-btn"
-                                                                            href="{{ route('admin.pages.edit', $item->id) }}">
-                                                                            <i class="fas fa-edit"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="remove">
-                                                                        <a class="btn btn-sm btn-danger remove-item-btn"
-                                                                            href="" data-bs-toggle="modal"
-                                                                            data-bs-target="#delete{{ $item->id }}">
-                                                                            <i class="fas fa-trash"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <x-form.modal :id="'delete' . $item->id" :title="'Remove User'"
-                                                                        :action="route(
-                                                                            'admin.pages.destroy',
-                                                                            $item->id,
-                                                                        )" :method="'DELETE'">
-                                                                        <div class="col-12">
-                                                                            {{ 'Are You Sure You Want To Remove' . '  ' . $item->name }}
-                                                                        </div>
-                                                                    </x-form.modal>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+                                                                                            <td>
+                                                                                                @if ($item->getFirstMediaUrl('banner-0'))
+                                                                                                    @if (Str::endsWith($item->getFirstMediaUrl('banner-0'), '.mp4'))
+                                                                                                        <video width="80" height="80" controls>
+                                                                                                            <source src="{{ $item->getFirstMediaUrl('banner-0') }}"
+                                                                                                                type="video/mp4">
+                                                                                                        </video>
+                                                                                                    @else
+                                                                                                        <img src="{{ $item->getFirstMediaUrl('banner-0') }}" height="80px"
+                                                                                                            width="80px" alt="banner image">
+                                                                                                    @endif
+                                                                                                @endif
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="d-flex gap-2">
+                                                                                                    <div class="edit">
+                                                                                                        <a class="btn btn-sm btn-info edit-item-btn"
+                                                                                                            href="{{ route('admin.pages.edit', $item->id) }}">
+                                                                                                            <i class="fas fa-edit"></i>
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                    <div class="remove">
+                                                                                                        <a class="btn btn-sm btn-danger remove-item-btn" href=""
+                                                                                                            data-bs-toggle="modal"
+                                                                                                            data-bs-target="#delete{{ $item->id }}">
+                                                                                                            <i class="fas fa-trash"></i>
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                    <x-form.modal :id="'delete' . $item->id" :title="'Remove User'"
+                                                                                                        :action="route(
+                                                            'admin.pages.destroy',
+                                                            $item->id,
+                                                        )" :method="'DELETE'">
+                                                                                                        <div class="col-12">
+                                                                                                            {{ 'Are You Sure You Want To Remove' . '  ' . $item->name }}
+                                                                                                        </div>
+                                                                                                    </x-form.modal>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                        </tr>
                                                     @endforeach
                                                 @endif
                                             </tbody>
