@@ -18,8 +18,8 @@ class ProjectsResource extends JsonResource
         return [
             'name' => $this->getTranslation('title', app()->getLocale()),
             'slug' => $this->slug,
-            'data' => route('api.projects', [$this->id]),
-            'childes' => ProjectsResource::collection($this->whenLoaded('childes')),
+            // 'data' => route('api.projects', [$this->id]),
+            // 'childes' => ProjectsResource::collection($this->whenLoaded('childes')),
         ];
     }
 }

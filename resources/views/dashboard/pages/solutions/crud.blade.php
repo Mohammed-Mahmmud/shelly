@@ -77,9 +77,8 @@
                                             @elseif($type == 'edit')
                                                 <div class="row">
                                                     <div class="col-6 mb-3">
-                                                        <x-form.input :name="'media'" :type="'file'"
-                                                            :multiple="'true'" :label="'Upload Image or Video'" :placehlder="'Please upload an image or video'"
-                                                            :accept="'image/*,video/*'" />
+                                                        <x-form.input :name="'media'" :type="'file'" :label="'Enter images'"
+                                                    :placehlder="'Please enter images'" :accept="'image/*,video/*'" :value="$data->getMedia('media') ?? ''" multiple />
                                                     </div>
                                                     <div class="col-6">
                                                         <x-form.dropdown :value="$data->types->pluck('id')->toArray() ?? ''" :array="$types"

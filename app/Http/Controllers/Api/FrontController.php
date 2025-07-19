@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use Throwable;
 use App\Models\Page;
 use App\Models\Type;
 use App\Models\Product;
 use App\Models\Project;
+use App\Models\Setting;
 use App\Models\Category;
 use App\Models\Solution;
 use App\Models\Technology;
+use App\Traits\ApiResponse;
 use App\Models\ProductUsing;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\HomeResource;
 use App\Http\Resources\PagesResources;
@@ -22,15 +26,14 @@ use App\Http\Resources\ProjectsResource;
 use App\Http\Resources\SolutionResource;
 use App\Http\Resources\ProjectsResources;
 use App\Http\Resources\ProductsFilterResource;
-use App\Models\Setting;
-use Illuminate\Http\JsonResponse;
 
 class FrontController extends Controller
 {
+    use ApiResponse;
     public function products(Request $request, $id = null)
     {
         if ($id) {
-            return ProductResource::make(Product::findOrFail($id));
+            return $this->success('Product fetched successfully', ProductResource::make(Product::findOrFail($id)));
         }
 
         // Start building the query
@@ -134,18 +137,20 @@ class FrontController extends Controller
         }
         // Paginate the results with 30 products per page
         $products = $query->paginate(30);
-        return response()->json([
-            'success' => true,
-            'products' => ProductsResource::collection($products)->response()->getData(true),
-            'filter' => ProductsFilterResource::make($products),
-        ]);
+        return $this->success(
+            'Products fetched successfully',
+            [
+                'products' => ProductsResource::collection($products)->response()->getData(true),
+                'filter' => ProductsFilterResource::make($products),
+            ]
+        );
         // return ProductsResource::collection($products);
     }
     public function productsFilter()
     {
-        return response()->json([
-            'success' => true,
-            'data' => [
+        return $this->success(
+            'Filter data fetched successfully',
+            [
                 'filter_by_types' => Type::all()->map(function ($data) {
                     return [
                         'id' => $data->id,
@@ -171,66 +176,106 @@ class FrontController extends Controller
                     ];
                 }),
                 'sort_by' => ['title-ascending', 'title-descending', 'best-selling', 'price-ascending', 'price-descending', 'created-ascending', 'created-descending', 'manual'],
-            ],
-        ]);
+            ]
+        );
     }
-    public function solutions(Page $page)
+    public function solutions(Page $page =  null)
     {
-        return SolutionResource::collection($page->solutions);
+        try {
+            if (!$page) {
+                $solution = Page::where('slug', 'solutions')->whereNull('parent_id')->with('childes')->first();
+                if ($solution) {
+                    return $this->success('Solutions fetched successfully', PagesResources::collection($solution->childes));
+                } else {
+                    return $this->error('Solutions page not found', 'Not Found');
+                }
+            }
+            return $this->success('Solutions fetched successfully', SolutionResource::collection($page->solutions));
+        } catch (Throwable $e) {
+            return $this->serverError($e, $e->getMessage(), $e->getCode());
+        }
     }
     public function projects($id = null)
     {
-        if (isset($id)) {
-        $projects = Project::where('page_id', $id)->active()->paginate(30);
-        } else {
-            $projects = Project::active()->get();
+        try {
+            if (isset($id)) {
+                $projects = Project::where('page_id', $id)->active()->paginate(15);
+            } else {
+                $projects = Project::active()->paginate(15);
+            }
+            // dd(ProjectsResources::collection($projects));
+            return $this->paginated(
+                'Projects fetched successfully',
+                ProjectsResources::collection($projects)->response()->getData(true),
+            );
+        } catch (Throwable $e) {
+            return $this->serverError($e, $e->getMessage(), $e->getCode());
         }
-        return response()->json([
-            'success' => true,
-            'projects' => ProjectsResources::collection($projects)->response()->getData(true),
-        ]);
     }
     public function project($id)
     {
-        return ProjectResource::make(
-            Project::where('id', $id)->active()->first()
+        return $this->success(
+            'Project fetched successfully',
+            ProjectResource::make(
+                Project::where('id', $id)->active()->first()
+            )
         );
     }
     public function navbar()
     {
         $pages = Page::active()->parents()->with('childes')->get();
-        return NavbarResources::make($pages);
+        return $this->success('Navbar data fetched successfully', NavbarResources::make($pages));
     }
     public function home($slug = null)
     {
         if ($slug) {
             $page = Page::active()->where('slug', $slug)->first();
-            return PagesResources::make($page);
+            return $this->success('Page data fetched successfully', PagesResources::make($page));
         }
-        return response()->json([
-            'success' => false,
-            'message' => 'Page not found',
-        ], 404);
+        return $this->error('Page not found', 404);
     }
     public function getHomePage()
     {
         try {
             $page = Page::active()->where('slug', 'home')->first();
-            return HomeResource::make($page);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Page not found',
-            ], 404);
+            return $this->success("Data Fetched Successfully", HomeResource::make($page));
+        } catch (Throwable $e) {
+            return $this->error($e->getMessage(), 404);
         }
     }
     public function settings(): JsonResponse
     {
         $settings = Setting::select('name', 'value')->get();
 
-        return response()->json([
-            'success' => true,
-            'data' => $settings,
-        ]);
+        return $this->success('Settings fetched successfully', $settings);
+    }
+
+    public function search(Request $request)
+    {
+        try {
+            $products = Product::with('types');
+
+            if ($request->has('search')) {
+                $search = $request->get('search');
+                $products = $products->where(function ($query) use ($search) {
+                    $query->where('title->en', 'LIKE', "%{$search}%")
+                        ->orWhere('title->ar', 'LIKE', "%{$search}%");
+                });
+            }
+
+            if ($request->has('type')) {
+                $type = $request->get('type');
+                $products = $products->whereHas('types', function ($q) use ($type) {
+                    $q->where('types.title->en', 'LIKE', "%{$type}%")
+                        ->orWhere('types.title->ar', 'LIKE', "%{$type}%");
+                });
+            }
+
+            $products = $products->get();
+
+            return $this->success('Products fetched successfully', ProductsResource::collection($products));
+        } catch (Throwable $e) {
+            return $this->error($e->getMessage(), 404);
+        }
     }
 }

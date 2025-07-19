@@ -50,4 +50,5 @@ class Product extends Model implements HasMedia
     {
         return $this->belongsToMany(ProductUsing::class, 'product_using', 'product_id', 'using_id');
     }
+
 }

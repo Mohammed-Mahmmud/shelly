@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title>Shelly | @yield('title')</title>
+<title>Nestfutrra | @yield('title')</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta content="" name="description">
 {{-- <link href="{{ asset('dashboard/assets/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css"> --}}

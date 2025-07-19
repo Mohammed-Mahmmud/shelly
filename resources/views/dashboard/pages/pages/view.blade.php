@@ -43,14 +43,19 @@
                                                         <td>{{ $loop->iteration }}</td>
                                                             <td>{{ $item->title }}</td>
                                                             <td>{{ $item->slug }}</td>
-                                                            <td>{{ $item->parents?->getTranslation('name','en') }}</td>
-                                                            <td><span
-                                                                    class="@if ($item->status == 'active') text-success @else text-danger @endif">
-                                                                    {{ $item->status }}
-                                                                </span></td>
                                                             <td>
-                                                                <img src="{{ $item->getFirstMediaUrl('banner-0') }}"
-                                                                    height="80px" width="80px" alt="banner image">
+                                                                @if ($item->getFirstMediaUrl('banner-0'))
+                                                                    @if (Str::endsWith($item->getFirstMediaUrl('banner-0'), '.mp4'))
+                                                                        <video width="80" height="80" controls>
+                                                                            <source
+                                                                                src="{{ $item->getFirstMediaUrl('banner-0') }}"
+                                                                                type="video/mp4">
+                                                                        </video>
+                                                                    @else
+                                                                        <img src="{{ $item->getFirstMediaUrl('banner-0') }}"
+                                                                            height="80px" width="80px" alt="banner image">
+                                                                    @endif
+                                                                @endif
                                                             </td>
                                                             <td>
                                                                 <div class="d-flex gap-2">

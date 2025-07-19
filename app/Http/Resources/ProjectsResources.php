@@ -15,10 +15,11 @@ class ProjectsResources extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'name' => $this->getTranslation('title', app()->getLocale()),
-            'slug' => $this->slug,
-            'data' => route('api.project', [$this->id]),
-            'childes' => ProjectsResource::collection($this->whenLoaded('childes')),
+            "id"=> $this->id,
+            'name' => $this->getTranslation('title', app()->getLocale()) ?? '',
+            'slug' => $this->slug ?? '',
+            // 'data' => route('api.project', [$this->id]),
+            // 'childes' => ProjectsResource::collection($this->whenLoaded('childes')),
         ];
     }
 }

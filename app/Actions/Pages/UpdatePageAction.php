@@ -27,7 +27,6 @@ class       UpdatePageAction
             "status" => $data['status'],
             "slug" => $data['slug']
         ];
-
         $page->update($formattedData);
 
         if (isset($data['images'])) {

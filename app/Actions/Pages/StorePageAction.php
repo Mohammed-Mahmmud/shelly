@@ -27,7 +27,6 @@ class StorePageAction
             "status" => $data['status'],
             "slug" => $data['slug']
         ];
-        // dd($formattedData);
         $page = Page::create($formattedData);
         if (isset($data['images'])) {
             foreach ($data['images'] as $key => $image) {
@@ -35,7 +34,7 @@ class StorePageAction
             }
         }
         if (isset($data['icon'])) {
-                $this->StoreImage($data['icon'], $page, 'icon');
+            $this->StoreImage($data['icon'], $page, 'icon');
         }
         toastr('data has been saved', 'success', 'success');
         return $page;

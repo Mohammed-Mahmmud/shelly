@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\FrontController;
-use App\Http\Controllers\Api\SettingsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\FrontController;
+use App\Http\Controllers\Api\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,11 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::controller(FrontController::class)->name('api.')->group(function () {
     Route::get('products/{id?}', 'products')->name('products');
-    Route::get('solutions/{page}', 'solutions')->name('solutions');
+    Route::get('solutions/{page?}', 'solutions')->name('solutions');
     Route::get('projects/{id?}', 'projects')->name('projects');
     Route::get('project/{id}/', 'project')->name('project');
     Route::get('navbar/{slug?}', 'navbar');
     Route::get('producs-filter', 'productsFilter')->name('productsFilter');
     Route::get('page/home', 'getHomePage')->name('home');
     Route::get('settings', 'settings')->name('settings');
+    Route::post('products/search', 'search')->name('products.search');
 });

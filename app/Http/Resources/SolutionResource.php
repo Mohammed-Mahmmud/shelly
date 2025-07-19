@@ -20,6 +20,7 @@ class SolutionResource extends JsonResource
             'title' => $this->getTranslation('title', app()->getLocale()),
             'desc' => $this->getTranslation('desc', app()->getLocale()),
             'slug' => $this->slug,
+            'image' => $this->getFirstMediaUrl('solution'),
             'types' => ProductTypeResource::collection($this->types),
         ];
     }

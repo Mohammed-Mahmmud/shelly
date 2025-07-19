@@ -3,9 +3,13 @@
 namespace App\Http\Resources;
 
 use App\Models\Page;
+use App\Models\Product;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Http\Resources\ImageResource;
+use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProjectResource;
+use App\Http\Resources\ProjectsResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class HomeResource extends JsonResource
@@ -26,8 +30,8 @@ class HomeResource extends JsonResource
                 'id' => $data->id,
                 'title' => $data->getTranslation('title', app()->getLocale()),
                 'icon' => $data->getFirstMediaUrl('icon'),
+                // 'desc' > $data->getTranslation('desc', app()->getLocale()),
                 'image' => $data->getFirstMediaUrl('banner-0'),
-                'solution' => route('api.solutions', [$data->id]),
             ];
         });
 
@@ -38,11 +42,8 @@ class HomeResource extends JsonResource
             "title" => $this->getTranslation('title', app()->getLocale()),
             "desc" => $this->getTranslation('desc', app()->getLocale()),
             'headerImage' => ImageResource::collectionToUrls($filteredImages),
-            'products' => route('api.products'),
-            'solutions' =>
-            [
-                'Start your smart home' => $solutionsChilds,
-            ],
+            'products' => ProductsResource::collection(Product::latest()->take(15)->get()),
+            'solutions' => $solutionsChilds,
             'projects' => ProjectResource::collection(Project::active()->get()),
             'projects_categories' => ProjectsResource::collection($projectsCate->childes)
         ];

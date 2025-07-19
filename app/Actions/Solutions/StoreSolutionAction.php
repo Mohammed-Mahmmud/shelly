@@ -10,7 +10,7 @@ class StoreSolutionAction
     use ImageHelper;
     public function handle(array $data)
     {
-//        dd($data);
+        //        dd($data);
         foreach ($data['content'] as $content) {
             $formattedcontent = [
                 "title" => [
@@ -25,9 +25,7 @@ class StoreSolutionAction
             ];
             $solution = Solution::create($formattedcontent);
             if (isset($content['media'])) {
-                foreach ($content['media'] as $key => $image) {
-                    $this->StoreImage($image, $solution, $content['title_en'] . '-' . $key);
-                }
+                $this->StoreImages($content['media'], $solution, 'solution');
             }
             $solution->types()->attach($content['types']);
             $solution->pages()->attach($data['pages']);

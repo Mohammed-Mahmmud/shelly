@@ -36,47 +36,56 @@
                                             <tbody class="list form-check-all">
                                                 @if (count($data) > 0)
                                                     @foreach ($data as $key => $item)
-                                                        <tr>
-                                                            <td>{{ $loop->iteration }}</td>
-                                                            <td>{{ $item->title }}</td>
-                                                            <td>
-                                                                {{-- @dump($item->getFirstMediaUrl($item->title . '-0')) --}}
-                                                                <x-form.preview-image :image="$item->getFirstMediaUrl($item->title . '-0')" :height="'50px'"
-                                                                    :width="'100px'" :alt="$item->title" />
-                                                            </td>
-                                                            <td>
-                                                                @foreach ($item->pages as $sol)
-                                                                        {{ $sol->getTranslation('name', app()->getLocale()) }}
-                                                                    <br>
-                                                                @endforeach
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex gap-2">
-                                                                    <div class="edit">
-                                                                        <a class="btn btn-sm btn-info edit-item-btn"
-                                                                            href="{{ route('admin.solutions.edit', $item->id) }}">
-                                                                            <i class="fas fa-edit"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="remove">
-                                                                        <a class="btn btn-sm btn-danger remove-item-btn"
-                                                                            href="" data-bs-toggle="modal"
-                                                                            data-bs-target="#delete{{ $item->id }}">
-                                                                            <i class="fas fa-trash"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <x-form.modal :id="'delete' . $item->id" :title="'Remove User'"
-                                                                        :action="route(
-                                                                            'admin.solutions.destroy',
-                                                                            $item->id,
-                                                                        )" :method="'DELETE'">
-                                                                        <div class="col-12">
-                                                                            {{ 'Are You Sure You Want To Remove' . '  ' . $item->name }}
-                                                                        </div>
-                                                                    </x-form.modal>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>{{ $loop->iteration }}</td>
+                                                                                            <td>{{ $item->title }}</td>
+                                                                                            <td>
+                                                                                                @if ($item->getFirstMediaUrl('solution'))
+                                                                                                    @if (Str::endsWith($item->getFirstMediaUrl('solution'), '.mp4'))
+                                                                                                        <video width="100" height="50" controls>
+                                                                                                            <source src="{{ $item->getFirstMediaUrl('solution') }}"
+                                                                                                                type="video/mp4">
+                                                                                                        </video>
+                                                                                                    @else
+                                                                                                        <img src="{{ $item->getFirstMediaUrl('solution') }}" height="50px"
+                                                                                                            width="100px" alt="banner image">
+                                                                                                    @endif
+                                                                                                @endif
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                @foreach ($item->pages as $sol)
+                                                                                                    {{ $sol->getTranslation('name', app()->getLocale()) }}
+                                                                                                    <br>
+                                                                                                @endforeach
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="d-flex gap-2">
+                                                                                                    <div class="edit">
+                                                                                                        <a class="btn btn-sm btn-info edit-item-btn"
+                                                                                                            href="{{ route('admin.solutions.edit', $item->id) }}">
+                                                                                                            <i class="fas fa-edit"></i>
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                    <div class="remove">
+                                                                                                        <a class="btn btn-sm btn-danger remove-item-btn" href=""
+                                                                                                            data-bs-toggle="modal"
+                                                                                                            data-bs-target="#delete{{ $item->id }}">
+                                                                                                            <i class="fas fa-trash"></i>
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                    <x-form.modal :id="'delete' . $item->id" :title="'Remove User'"
+                                                                                                        :action="route(
+                                                            'admin.solutions.destroy',
+                                                            $item->id,
+                                                        )" :method="'DELETE'">
+                                                                                                        <div class="col-12">
+                                                                                                            {{ 'Are You Sure You Want To Remove' . ' ' . $item->name
+                                                                                                                                                                                                    }}
+                                                                                                        </div>
+                                                                                                    </x-form.modal>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                        </tr>
                                                     @endforeach
                                                 @endif
                                             </tbody>

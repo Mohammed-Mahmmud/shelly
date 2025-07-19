@@ -16,7 +16,7 @@ return [
     |
      */
 
-    'name' => env('APP_NAME', 'shelly'),
+    'name' => env('APP_NAME', 'Nestfutrra'),
     'panel' => env('PANEL', 'default-value-if-not-set'),
 
 

@@ -15,6 +15,13 @@ class PagesResources extends JsonResource
 
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->getTranslation('name', app()->getLocale()),
+            'title' => $this->getTranslation('title', app()->getLocale()),
+            'desc' => $this->getTranslation('desc', app()->getLocale()),
+            'slug' => $this->slug,
+            // Add more fields as needed
+        ];
     }
 }

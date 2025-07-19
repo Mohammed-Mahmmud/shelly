@@ -24,9 +24,7 @@ class UpdateSolutionAction
         ];
         $solution->update($formattedData);
         if (isset($data['media'])) {
-            foreach ($data['media'] as $key => $image) {
-                $this->UpdateImage($image, $solution, $data['title_en'] . '-' . $key);
-            }
+            $this->UpdateImages($data['media'], $solution, 'solution');
         }
         $solution->types()->sync($data['types']);
         $solution->pages()->sync($data['pages']);

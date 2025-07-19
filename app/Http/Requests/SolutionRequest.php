@@ -30,7 +30,7 @@ class SolutionRequest extends FormRequest
     {
         $request = Request();
         return Validator::make($request->all(), [
-            'media.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'media' => 'required|file|mimes:jpeg,png,jpg,gif,mp4,svg,webp|max:40960',
             'content' =>  'required',
             'slug' =>  'required',
             'types' =>  'required',
@@ -41,7 +41,7 @@ class SolutionRequest extends FormRequest
     {
         $request = Request();
         return Validator::make($request->all(), [
-            'media.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'media' => 'nullable|file|mimes:jpeg,png,jpg,gif,mp4,svg,webp|max:40960',
             'title_en' =>  'required|string |max:255',
             'title_ar' =>  'required|string |max:255',
             'desc_en' =>  'required|string',
