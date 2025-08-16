@@ -37,6 +37,7 @@ class ProjectRequest extends FormRequest
             'status' => 'required',
             'slug' => 'required',
             'page_id' => 'required',
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif,webp|max:20480',
         ]);
     }
     public function validationUpdate()
@@ -50,6 +51,7 @@ class ProjectRequest extends FormRequest
             'status' => 'required',
             'slug' => 'required',
             'page_id' => 'required',
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif,webp|max:20480',
         ]);
     }
 }

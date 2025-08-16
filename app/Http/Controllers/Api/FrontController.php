@@ -190,7 +190,16 @@ class FrontController extends Controller
                     return $this->error('Solutions page not found', 'Not Found');
                 }
             }
-            return $this->success('Solutions fetched successfully', SolutionResource::collection($page->solutions));
+            $page->load('solutions');
+
+            return $this->success(
+                'Solutions fetched successfully',
+                [
+                    'page'      => new PagesResources($page),
+                    'solutions' => SolutionResource::collection($page->solutions),
+                ]
+            );
+//            return $this->success('Solutions fetched successfully', SolutionResource::collection($page->solutions));
         } catch (Throwable $e) {
             return $this->serverError($e, $e->getMessage(), $e->getCode());
         }

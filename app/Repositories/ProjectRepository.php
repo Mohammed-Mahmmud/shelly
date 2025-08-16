@@ -6,6 +6,7 @@ use App\Models\Project;
 
 class ProjectRepository
 {
+    use \App\Helper\ImageHelper;
     public function find($id)
     {
         return Project::findOrFail($id);
@@ -31,7 +32,11 @@ class ProjectRepository
             'slug' => $data['slug'],
             'page_id' => $data['page_id'],
         ];
-        return Project::create($formatteddata);
+        $project =  Project::create($formatteddata);
+        if (isset($data['image'])) {
+            $this->StoreImage($data['image'], $project, 'image');
+        }
+        return $project;
     }
     public function edit(Project $project, array $data)
     {
@@ -50,6 +55,9 @@ class ProjectRepository
         ];
 
         $project->update($formatteddata);
+        if (isset($data['image'])) {
+            $this->UpdateImage($data['image'], $project, 'image');
+        }
         return $project;
     }
 }

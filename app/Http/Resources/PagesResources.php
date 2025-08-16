@@ -21,6 +21,7 @@ class PagesResources extends JsonResource
             'title' => $this->getTranslation('title', app()->getLocale()),
             'desc' => $this->getTranslation('desc', app()->getLocale()),
             'slug' => $this->slug,
+            'image' => $this->getFirstMediaUrl('banner-0') ?  : null,
             // Add more fields as needed
         ];
     }

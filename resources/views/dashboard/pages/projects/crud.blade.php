@@ -35,12 +35,12 @@
                                                 @endforeach
                                             @endif
 
-                                            <div class="col-4 mb-3">
+                                            <div class="col-6 mb-3">
                                                 <x-form.select :value="$data->status ?? ''" :array="App\Models\Project::STATUS" :label="'choose project Status:'"
                                                     :name="'status'">
                                                 </x-form.select>
                                             </div>
-                                            <div class="col-4 mb-3">
+                                            <div class="col-6 mb-3">
                                                 <label for="pages"
                                                     class="form-label">{{ ucfirst('Choose categories') }}</label>
                                                 <select name="page_id" id="pages-id" class="form-control">
@@ -53,10 +53,17 @@
                                                 </select>
                                                 <x-form.error :name="'page_id'" />
                                             </div>
-                                            <div class="col-4 mb-3">
-                                                <x-form.input :name="'slug'" :type="'text'" :label="'Enter slug'"
-                                                    :placehlder="'Please enter slug'" :value="$data->slug ?? ''" />
+                                            <div class="col-6 mb-3">
+                                                <x-form.input :name="'slug'" :type="'text'" :label="'Enter Author'"
+                                                    :placehlder="'Please enter Author'" :value="$data->slug ?? ''" />
                                             </div>
+                                            <div class="col-6 mb-3">
+                                                <x-form.input :name="'image'" :type="'file'" :label="'Upload image'"
+                                                    :placehlder="'Please upload image'" />
+                                                @if ($data->image)
+                                                    <img src="{{ asset($data->image) }}" alt="Project Image"
+                                                        class="img-fluid mt-2" style="max-width: 200px;">
+                                                @endif
                                         </div>
                                         <hr>
                                     </x-form.form>

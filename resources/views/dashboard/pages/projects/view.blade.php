@@ -28,6 +28,8 @@
                                                 <tr>
                                                     <th width="5%">#</th>
                                                     <th width="20%">name</th>
+                                                    <th width="20%">Author</th>
+                                                    <th width="20%">image</th>
                                                     <th width="20%">status</th>
                                                     <th width="20%">Category</th>
                                                     <th width="5%">action</th>
@@ -39,6 +41,11 @@
                                                         <tr>
                                                             <td>{{ $loop->iteration }}</td>
                                                             <td>{{ $item->title }}</td>
+                                                            <td>{{ $item->slug }}</td>
+                                                            <td>
+                                                                <img src="{{ $item->getFirstMediaUrl('image') }}" height="80px"
+                                                                     width="80px" alt="project">
+                                                            </td>
                                                             <td><span
                                                                     class="@if ($item->status == 'active') text-success @else text-danger @endif">
                                                                     {{ $item->status }}

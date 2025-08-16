@@ -15,13 +15,22 @@ class SolutionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $types = $this->types()->with('products')->get();
         return [
             'id' => $this->id,
             'title' => $this->getTranslation('title', app()->getLocale()),
             'desc' => $this->getTranslation('desc', app()->getLocale()),
-            'slug' => $this->slug,
             'image' => $this->getFirstMediaUrl('solution'),
-            'types' => ProductTypeResource::collection($this->types),
-        ];
+            'products' => $types->pluck('products')
+                ->flatten()
+                ->unique('id')
+                ->map(fn($product) => [
+                    'id'    => $product->id,
+                    'title' => $product->getTranslation('title', app()->getLocale()),
+                    'price' => $product->price,
+                    'image' => $product->getFirstMediaUrl('snippet_image'),
+                ])
+                ->values(),
+            ];
     }
 }

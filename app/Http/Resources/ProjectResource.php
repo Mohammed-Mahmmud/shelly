@@ -15,9 +15,11 @@ class ProjectResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'title' => $this->getTRanslation('title', app()->getLocale()),
             'desc' => $this->getTRanslation('desc', app()->getLocale()),
-            'slug' => $this->slug,
+            'author' => $this->slug,
+            'image' => $this->getFirstMediaUrl('image'),
             // 'allProjects' => route('api.projects'),
         ];
     }

@@ -16,8 +16,10 @@ class ProjectsResource extends JsonResource
     {
         if ($this->where('status', 'active'));
         return [
+            'id' => $this->id,
             'name' => $this->getTranslation('title', app()->getLocale()),
             'slug' => $this->slug,
+            'image' => $this->getFirstMediaUrl('banner-0'),
             // 'data' => route('api.projects', [$this->id]),
             // 'childes' => ProjectsResource::collection($this->whenLoaded('childes')),
         ];

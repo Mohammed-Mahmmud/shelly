@@ -18,6 +18,7 @@ class ProjectsResources extends JsonResource
             "id"=> $this->id,
             'name' => $this->getTranslation('title', app()->getLocale()) ?? '',
             'slug' => $this->slug ?? '',
+            'image' => $this->getFirstMediaUrl('image') ?? null,
             // 'data' => route('api.project', [$this->id]),
             // 'childes' => ProjectsResource::collection($this->whenLoaded('childes')),
         ];
