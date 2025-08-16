@@ -7,3 +7,9 @@
 *.sublime-project
 .env
 vendor
+.cursor
+.github/
+.junie/
+.mcp.json
+.vscode/
+CLAUDE.md
