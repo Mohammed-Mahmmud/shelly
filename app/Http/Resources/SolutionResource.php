@@ -21,25 +21,16 @@ class SolutionResource extends JsonResource
                     'desc'  => $type->desc ? $type->getTranslation('desc', app()->getLocale()) : '',
                     'icon'  => $type->getFirstMediaUrl('icon'),
 
-                    'solutions' => [
-                        [
-                            'id'    => $this->id,
-                            'title' => $this->getTranslation('title', app()->getLocale()),
-                            'desc'  => $this->getTranslation('desc', app()->getLocale()),
-                            'image' => $this->getFirstMediaUrl('solution'),
-
-                            'products' => $type->relationLoaded('products')
-                                ? $type->products->map(function ($product) {
-                                    return [
-                                        'id'    => $product->id,
-                                        'title' => $product->getTranslation('title', app()->getLocale()),
-                                        'price' => $product->price,
-                                        'image' => $product->getFirstMediaUrl('snippet_image'),
-                                    ];
-                                })->values()
-                                : [],
-                        ]
-                    ]
+                    'products' => $type->relationLoaded('products')
+                        ? $type->products->map(function ($product) {
+                            return [
+                                'id'    => $product->id,
+                                'title' => $product->getTranslation('title', app()->getLocale()),
+                                'price' => $product->price,
+                                'image' => $product->getFirstMediaUrl('snippet_image'),
+                            ];
+                        })->values()
+                        : [],
                 ];
             }),
         ];
