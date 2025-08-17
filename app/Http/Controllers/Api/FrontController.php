@@ -194,10 +194,12 @@ class FrontController extends Controller
 
             return $this->success(
                 'Solutions fetched successfully',
-                [
-                    'page'      => new PagesResources($page),
-                    'solutions' => SolutionResource::collection($page->solutions),
-                ]
+                array_merge(
+                    (new PagesResources($page))->toArray(request()),
+                    [
+                        'solutions' => SolutionResource::collection($page->solutions),
+                    ]
+                )
             );
 //            return $this->success('Solutions fetched successfully', SolutionResource::collection($page->solutions));
         } catch (Throwable $e) {

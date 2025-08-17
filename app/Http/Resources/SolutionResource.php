@@ -21,6 +21,7 @@ class SolutionResource extends JsonResource
             'title' => $this->getTranslation('title', app()->getLocale()),
             'desc' => $this->getTranslation('desc', app()->getLocale()),
             'image' => $this->getFirstMediaUrl('solution'),
+            'types' => ProductTypeResource::collection($this->types),
             'products' => $types->pluck('products')
                 ->flatten()
                 ->unique('id')
