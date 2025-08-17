@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\SolutionTypeResource;
 use Throwable;
 use App\Models\Page;
 use App\Models\Type;
@@ -193,6 +194,10 @@ class FrontController extends Controller
             $page->load([
                 'solutions.types.products',
             ]);
+            $types = $page->solutions->flatMap(function ($solution) {
+                return $solution->types;
+            });
+            $types = SolutionTypeResource::collection($types);
 
             return $this->success(
                 'Solutions fetched successfully',
@@ -200,8 +205,8 @@ class FrontController extends Controller
                     (new PagesResources($page))->toArray(request()),
                     [
                         'solutions' => SolutionResource::collection($page->solutions),
-                    ]
-                )
+                        'types'=>$types
+                    ])
             );
 
 

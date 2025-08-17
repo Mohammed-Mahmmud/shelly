@@ -12,7 +12,7 @@ class Dropdown extends Component
      * Create a new component instance.
      */
     public  $label, $name, $value, $array, $multiple;
-    public function __construct($array, $label, $name, $value, $multiple = true)
+    public function __construct($array, $label, $name, $value, $multiple = false)
     {
         $this->array = $array;
         $this->label = $label ?? '';
