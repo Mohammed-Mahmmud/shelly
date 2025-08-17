@@ -190,20 +190,24 @@ class FrontController extends Controller
                     return $this->error('Solutions page not found', 'Not Found');
                 }
             }
-            $page->load('solutions');
+            $page->load([
+                'solutions.types.products',
+            ]);
 
             return $this->success(
                 'Solutions fetched successfully',
-                array_merge(
-                    (new PagesResources($page))->toArray(request()),
-                    [
-                        'solutions' => SolutionResource::collection($page->solutions),
-                    ]
-                )
+//                array_merge(
+//                    (new PagesResources($page))->toArray(request()),
+//                    [
+                         SolutionResource::collection($page->solutions)
+//                    ]
+//                )
             );
+
+
 //            return $this->success('Solutions fetched successfully', SolutionResource::collection($page->solutions));
         } catch (Throwable $e) {
-            return $this->serverError($e, $e->getMessage(), $e->getCode());
+            return $this->serverError($e, $e->getMessage(), $e->getCode() > 0 ? $e->getCode() : 500);
         }
     }
     public function projects($id = null)
