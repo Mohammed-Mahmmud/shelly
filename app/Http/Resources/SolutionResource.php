@@ -17,6 +17,7 @@ class SolutionResource extends JsonResource
 
             'types' => $this->types->map(function ($type) {
                 return [
+                    'id'    => $type->id,
                     'title' => $type->getTranslation('title', app()->getLocale()),
                     'desc'  => $type->desc ? $type->getTranslation('desc', app()->getLocale()) : '',
                     'icon'  => $type->getFirstMediaUrl('icon'),
