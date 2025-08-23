@@ -14,7 +14,6 @@ class ProductTypeResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // dd($this);
         return [
             'title' => $this->getTranslation('title', app()->getLocale()),
             'desc' => $this->desc ? $this->getTranslation('desc', app()->getLocale()) : '',

@@ -27,6 +27,7 @@ use App\Http\Resources\ProjectsResource;
 use App\Http\Resources\SolutionResource;
 use App\Http\Resources\ProjectsResources;
 use App\Http\Resources\ProductsFilterResource;
+use App\Http\Resources\ProductTypeResource;
 
 class FrontController extends Controller
 {
@@ -216,15 +217,19 @@ class FrontController extends Controller
             return $this->serverError($e, $e->getMessage(), $e->getCode() > 0 ? $e->getCode() : 500);
         }
     }
-    public function projects($id = null)
+    public function projects(Request $request, $id = null)
     {
         try {
+            $perPage = $request->get('per_page', 15);
+
             if (isset($id)) {
-                $projects = Project::where('page_id', $id)->active()->paginate(15);
+                $projects = Project::where('page_id', $id)
+                    ->active()
+                    ->paginate($perPage);
             } else {
-                $projects = Project::active()->paginate(15);
+                $projects = Project::active()->paginate($perPage);
             }
-            // dd(ProjectsResources::collection($projects));
+
             return $this->paginated(
                 'Projects fetched successfully',
                 ProjectsResources::collection($projects)->response()->getData(true),
@@ -233,6 +238,7 @@ class FrontController extends Controller
             return $this->serverError($e, $e->getMessage(), $e->getCode());
         }
     }
+
     public function project($id)
     {
         return $this->success(
@@ -295,6 +301,16 @@ class FrontController extends Controller
             $products = $products->get();
 
             return $this->success('Products fetched successfully', ProductsResource::collection($products));
+        } catch (Throwable $e) {
+            return $this->error($e->getMessage(), 404);
+        }
+    }
+
+    public function getTypes()
+    {
+        try {
+            $types = Type::get();
+            return $this->success('Types fetched successfully', ProductTypeResource::collection($types));
         } catch (Throwable $e) {
             return $this->error($e->getMessage(), 404);
         }

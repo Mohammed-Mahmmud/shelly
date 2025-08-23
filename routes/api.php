@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+// use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\FrontController;
 use App\Http\Controllers\Api\SettingsController;
+use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +31,5 @@ Route::controller(FrontController::class)->name('api.')->group(function () {
     Route::get('projects/{id?}', 'projects')->name('projects');
     Route::get('project/{id}/', 'project')->name('project');
     Route::get('navbar/{slug?}', 'navbar');
+    Route::get('types/', 'getTypes')->name('types');
 });
