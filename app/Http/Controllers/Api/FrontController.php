@@ -205,12 +205,13 @@ class FrontController extends Controller
                     (new PagesResources($page))->toArray(request()),
                     [
                         'solutions' => SolutionResource::collection($page->solutions),
-                        'types'=>$types
-                    ])
+                        'types' => $types
+                    ]
+                )
             );
 
 
-//            return $this->success('Solutions fetched successfully', SolutionResource::collection($page->solutions));
+            //            return $this->success('Solutions fetched successfully', SolutionResource::collection($page->solutions));
         } catch (Throwable $e) {
             return $this->serverError($e, $e->getMessage(), $e->getCode() > 0 ? $e->getCode() : 500);
         }
