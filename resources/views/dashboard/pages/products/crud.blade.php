@@ -256,11 +256,13 @@
                                                 :name="'types'" :multiple="true">
                                             </x-form.dropdown>
                                         </div>
+
                                         <div class="col-6">
                                             <x-form.dropdown :value="$data->technologies->pluck('id')->toArray() ?? ''" :array="$technologies" :label="'choose technologies:'"
                                                 :name="'technologies'" :multiple="true">
                                             </x-form.dropdown>
                                         </div>
+
                                         <div class="col-6">
                                             <x-form.dropdown :value="$data->productUsings->pluck('id')->toArray() ?? ''" :array="$productUsings" :label="'choose product usings:'"
                                                 :name="'productUsings'" :multiple="true">
